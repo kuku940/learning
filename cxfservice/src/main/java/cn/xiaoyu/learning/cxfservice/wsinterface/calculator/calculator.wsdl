@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.service.cxfservice.learning.xiaoyu.cn/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://service.cxfservice.learning.xiaoyu.cn/" name="CalculatorService" targetNamespace="http://impl.service.cxfservice.learning.xiaoyu.cn/">
+  <wsdl:import location="http://localhost:8080/cxfservice/webService/calculator?wsdl=ICalculator.wsdl" namespace="http://service.cxfservice.learning.xiaoyu.cn/">
+    </wsdl:import>
+  <wsdl:binding name="CalculatorServiceSoapBinding" type="ns1:ICalculator">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sub">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sub">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="subResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculatorService">
+    <wsdl:port binding="tns:CalculatorServiceSoapBinding" name="CalculatorPort">
+      <soap:address location="http://localhost:8080/cxfservice/webService/calculator"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
