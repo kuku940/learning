@@ -10,14 +10,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mock</artifactId>
+    <description>Java的Mock测试框架</description>
 
     <dependencies>
-        <!-- mock -->
+        <!-- EasyMock -->
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
             <version>3.6</version>
         </dependency>
+
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+
+        <!-- PowerMock -->
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito</artifactId>
@@ -28,6 +38,38 @@
             <artifactId>powermock-module-junit4</artifactId>
             <version>1.7.4</version>
         </dependency>
+
+        <!-- jmockit 请确保JMockit的依赖定义出现在JUnit的依赖之前 -->
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.40</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- JMockit的代码覆盖率 -->
+            <!--<plugin>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<argLine>-->
+                        <!-- -javaagent:"${settings.localRepository}/org/jmockit/jmockit/1.40/jmockit-1.40.jar=coverage"-->
+                    <!--</argLine>-->
+                    <!--<disableXmlReport>false</disableXmlReport>-->
+                    <!--<systemPropertyVariables>-->
+                        <!--<coverage-output>html</coverage-output>-->
+                        <!--<coverage-outputDir>${project.build.directory}/codecoverage-output</coverage-outputDir>-->
+                        <!--<coverage-metrics>all</coverage-metrics>-->
+                    <!--</systemPropertyVariables>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
 
 </project>

@@ -1,0 +1,1 @@
+[RabbitMq教程](https://blog.csdn.net/column/details/rabbitmq-for-java.html)
