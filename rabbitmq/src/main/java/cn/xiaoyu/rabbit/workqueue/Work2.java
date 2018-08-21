@@ -4,6 +4,7 @@ import com.rabbitmq.client.*;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Roin zhang
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeoutException;
  */
 
 public class Work2 {
+    private static AtomicInteger flag = new AtomicInteger(0);
     private static final String TASK_QUEUE_NAME = "task_queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
@@ -34,10 +36,14 @@ public class Work2 {
                 System.out.println("Worker2 [x] Received '" + message + "'");
                 try {
                     doWork(message);
-                } finally {
-                    System.out.println("Worker2 [x] Done");
+
                     // 消息处理完成确认
                     channel.basicAck(envelope.getDeliveryTag(), false);
+                    System.out.println("Worker2 [x] Done");
+                } catch (Exception e) {
+                    // requeue设置为true，这条消息会被重新存入队列，false则会把消息从队列中移除
+                    channel.basicReject(envelope.getDeliveryTag(), true);
+                    System.out.println("Worker2 [x] Fail");
                 }
             }
         };
@@ -47,7 +53,11 @@ public class Work2 {
 
     private static void doWork(String task) {
         try {
-            // 暂停一秒
+            int i = flag.incrementAndGet();
+            if (i % 2 == 1) {
+                // 模拟异常情况
+                throw new RuntimeException("消费端处理异常");
+            }
             Thread.sleep(1000);
         } catch (InterruptedException ignored) {
             Thread.currentThread().interrupt();

@@ -34,9 +34,9 @@ public class Work1 {
                 try {
                     doWork(message);
                 } finally {
-                    System.out.println("Worker1 [x] Done");
                     // 消息处理完成确认
                     channel.basicAck(envelope.getDeliveryTag(), false);
+                    System.out.println("Worker1 [x] Done");
                 }
             }
         };

@@ -4,4 +4,6 @@
     guava                   guava库的使用
     mock                    面向开发的测试库
     java8                   Java8的新特性
+    cxfservice              webService服务
+    rabbitmq                RabbitMQ消息队列
    
