@@ -8,6 +8,9 @@ import mockit.MockUp;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Mock泛型(类型变量）
  *
@@ -39,7 +42,7 @@ public class GenericMockUpTest {
             }
 
             @Override
-            public int method2() {
+            public int method2(List list) {
                 return 1;
             }
         };
@@ -51,16 +54,15 @@ public class GenericMockUpTest {
             }
 
             @Override
-            public int method2() {
-
+            public int method2(List list) {
                 return 2;
             }
         };
         // 发现自定义的实现没有被作用，而是被Mock逻辑替代了
         Assert.assertEquals(10, instance1.method1());
         Assert.assertEquals(10, instance2.method1());
-        Assert.assertEquals(20, instance1.method2());
-        Assert.assertEquals(20, instance2.method2());
+        Assert.assertEquals(20, instance1.method2(new ArrayList<>()));
+        Assert.assertEquals(20, instance2.method2(new ArrayList<>()));
     }
 
     /**
@@ -75,7 +77,7 @@ public class GenericMockUpTest {
             {
                 instance.method1();
                 result = 10;
-                instance.method2();
+                instance.method2(withInstanceOf(List.class));
                 result = 20;
             }
         };
@@ -87,7 +89,7 @@ public class GenericMockUpTest {
             }
 
             @Override
-            public int method2() {
+            public int method2(List list) {
                 return 1;
             }
         };
@@ -99,14 +101,14 @@ public class GenericMockUpTest {
             }
 
             @Override
-            public int method2() {
+            public int method2(List list) {
                 return 2;
             }
         };
         // 发现自定义的实现没有被作用，而是被Mock逻辑替代了
         Assert.assertEquals(10, instance1.method1());
         Assert.assertEquals(10, instance2.method1());
-        Assert.assertEquals(20, instance1.method2());
-        Assert.assertEquals(20, instance2.method2());
+        Assert.assertEquals(20, instance1.method2(new ArrayList<>()));
+        Assert.assertEquals(20, instance2.method2(new ArrayList<>()));
     }
 }

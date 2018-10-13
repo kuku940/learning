@@ -7,6 +7,15 @@ package cn.xiaoyu.jmockit.common;
 
 public class AnOrdinaryClass {
     /**
+     * 私有成员变量
+     */
+    private int value;
+
+    public int getValue() {
+        return value;
+    }
+
+    /**
      * 静态方法
      *
      * @return

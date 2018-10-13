@@ -7,6 +7,9 @@ import mockit.MockUp;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Mock接口
  *
@@ -24,12 +27,12 @@ public class InterfaceMockingTest {
         new Expectations() {{
             anOrdinaryInterface.method1();
             result = 10;
-            anOrdinaryInterface.method2();
+            anOrdinaryInterface.method2(withInstanceOf(List.class));
             result = 20;
         }};
 
         Assert.assertEquals(10, anOrdinaryInterface.method1());
-        Assert.assertEquals(20, anOrdinaryInterface.method2());
+        Assert.assertEquals(20, anOrdinaryInterface.method2(new ArrayList<>()));
     }
 
     @Test

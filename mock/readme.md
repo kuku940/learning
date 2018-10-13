@@ -63,8 +63,27 @@ PowerMock有两个重要的注解：
 @PrepareForTest注解和@RunWith注解是结合使用的，不要单独使用@PrepareForTest，否则不起作用。当使用PowerMock去mock静态，
 final或者私有方法时，需要加上这两个注解。
 
-### Jmockit
+### jmockit示例
 JMockit 是一个轻量级的mock框架是用以帮助开发人员编写测试程序的一组工具和API，
 该项目完全基于 Java 5 SE 的 java.lang.instrument 包开发，内部使用 ASM 库来修改Java的Bytecode。
+  
+ 
+http://ginge.iteye.com/blog/841182
+https://www.cnblogs.com/simplestupid/p/5170220.html
+
+#### mock私有方法和私有属性
+
+    // 私有属性mock
+    new Expectations(instance) {{  
+        Deencapsulation.setField(instance, "size", 2);  
+    }};  
+    
+    // 私有方法mock jmockit 1.36版本后invoke方法被废弃
+    new Expectations(instance) {{  
+        Deencapsulation.invoke(instance, "getSize");  
+        result = 2;  
+    }};  
+    
+
 
 [JMockit中文网](http://jmockit.cn/index.htm)

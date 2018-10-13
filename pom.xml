@@ -23,6 +23,8 @@
         <module>mock</module>
         <module>cxfservice</module>
         <module>rabbitmq</module>
+        <module>common</module>
+        <module>netty</module>
     </modules>
 
     <properties>
