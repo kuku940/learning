@@ -25,6 +25,7 @@
         <module>rabbitmq</module>
         <module>common</module>
         <module>netty</module>
+        <module>protobuf</module>
     </modules>
 
     <properties>
