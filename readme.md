@@ -6,4 +6,5 @@
     java8                   Java8的新特性
     cxfservice              webService服务
     rabbitmq                RabbitMQ消息队列
+    protobuf                protobuf序列化工具
    

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package tutorial;
+
+option java_package = "cn.xiaoyu.protobuf.domain";
+option java_outer_classname = "UserProto";
+
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
