@@ -1,4 +1,4 @@
-package cn.xiaoyu.rocketmq;
+package cn.xiaoyu.rocketmq.simple;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
@@ -6,13 +6,16 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
-public class MQProducer {
+/**
+ * 简单消息示例 - 生产者
+ */
+public class SimpleProducer {
   public static void main(String[] args) throws Exception {
     startAsync();
   }
 
   /**
-   * 同步启动生产者
+   * 同步传输 - 用于重要通知消息，短信通知，短信营销系统等
    *
    * @throws Exception
    */
@@ -38,7 +41,7 @@ public class MQProducer {
   }
 
   /**
-   * 异步发送消息
+   * 异步传输 - 用于响应时间敏感的业务场景
    *
    * @throws Exception
    */
@@ -77,7 +80,7 @@ public class MQProducer {
   }
 
   /**
-   * 同步启动生产者
+   * 单向传输 - 日志收集
    *
    * @throws Exception
    */
