@@ -8,5 +8,16 @@ option java_outer_classname = "UserProto";
 message User {
   int32 id = 1;
   string name = 2;
-  string email = 3;
+  repeated Url urls = 3;
+  map<string, string> contactMap = 4;
+}
+
+message Url {
+  string name = 1;
+  string detail = 2;
+}
+
+enum Gender {
+  MALE = 0;
+  FEMALE = 1;
 }

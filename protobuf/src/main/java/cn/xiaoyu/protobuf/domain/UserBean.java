@@ -1,18 +1,13 @@
 package cn.xiaoyu.protobuf.domain;
 
+import java.util.List;
+import java.util.Map;
+
 public class UserBean {
   private int id;
   private String name;
-  private String email;
-
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
+  private List<UrlBean> urls;
+  private Map<String, String> contactMap;
 
   public String getName() {
     return name;
@@ -28,5 +23,21 @@ public class UserBean {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public List<UrlBean> getUrls() {
+    return urls;
+  }
+
+  public void setUrls(List<UrlBean> urls) {
+    this.urls = urls;
+  }
+
+  public Map<String, String> getContactMap() {
+    return contactMap;
+  }
+
+  public void setContactMap(Map<String, String> contactMap) {
+    this.contactMap = contactMap;
   }
 }
