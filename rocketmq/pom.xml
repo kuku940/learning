@@ -21,10 +21,5 @@
       <artifactId>rocketmq-client</artifactId>
       <version>${rocketmq.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.rocketmq</groupId>
-      <artifactId>rocketmq-all</artifactId>
-      <version>${rocketmq.version}</version>
-    </dependency>
   </dependencies>
 </project>
