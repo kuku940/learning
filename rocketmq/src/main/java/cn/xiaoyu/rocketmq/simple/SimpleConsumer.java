@@ -6,7 +6,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 
 /**
- * 简单消息示例 - 消费者
+ * 简单消息 - 消费者
  */
 public class SimpleConsumer {
   public static void main(String[] args) throws MQClientException {
