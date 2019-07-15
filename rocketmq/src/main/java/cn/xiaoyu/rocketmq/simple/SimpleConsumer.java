@@ -6,13 +6,13 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 
 /**
- * 简单消息 - 消费者
+ * 简单消息示例 - 消费者
  */
 public class SimpleConsumer {
   public static void main(String[] args) throws MQClientException {
     DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("mq-group");
 
-    consumer.setNamesrvAddr("127。0.0.1：9876");
+    consumer.setNamesrvAddr("127.0.0.1：9876");
     consumer.setInstanceName("consumer");
     consumer.subscribe("TopicTest", "*");
 

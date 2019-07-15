@@ -7,7 +7,7 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
 /**
- * 简单消息 - 生产者
+ * 简单消息示例 - 生产者
  */
 public class SimpleProducer {
   public static void main(String[] args) throws Exception {
