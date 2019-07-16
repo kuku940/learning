@@ -7,4 +7,8 @@
     cxfservice              webService服务
     rabbitmq                RabbitMQ消息队列
     protobuf                protobuf序列化工具
+    
+
+## 参考链接    
+[idea中git回退远程仓库版本](https://www.cnblogs.com/gexiaoshan/p/10182135.html)
    
