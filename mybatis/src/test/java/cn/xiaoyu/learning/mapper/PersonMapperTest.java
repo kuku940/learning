@@ -1,6 +1,6 @@
 package cn.xiaoyu.learning.mapper;
 
-import cn.xiaoyu.learning.domain.User;
+import cn.xiaoyu.learning.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

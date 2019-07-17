@@ -23,9 +23,9 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "mybatis/src/main/java");
+        gc.setOutputDir(projectPath + "/mybatis/src/main/java");
         gc.setAuthor("Roin");
-        gc.setFileOverride(false);// 是否覆盖同名文件，默认是false
+        gc.setFileOverride(true);// 是否覆盖同名文件，默认是false
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
@@ -44,7 +44,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("cn.xiaoyu.learning.domain");
+        pc.setParent("cn.xiaoyu.learning");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -62,7 +62,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名
-                return projectPath + "mybatis/src/main/resources/mapper/" //  + pc.getModuleName() 注释掉mapper.后要输入的
+                return projectPath + "/mybatis/src/main/resources/mapper/" //  + pc.getModuleName() 注释掉mapper.后要输入的
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
@@ -87,7 +87,6 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("cn.xiaoyu.learning.common.BaseEntity");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         strategy.setInclude("user");

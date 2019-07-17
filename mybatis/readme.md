@@ -1,9 +1,7 @@
 
-## 逆向工程自动生成代码
-  
-使用mybatis-generator-core自动生成代码
+## mybatis-plus 
 
-1. 创建generatorConfig.xml和generator.properties文件，并配置相关信息
-2. 运行Generator.main()方法
+### 代码生成器
+运行CodeGenerator类，自动创建entity/mapper/service/controller等相关类
+以及resources/mapper/*.xml文件
 
-## 通用dao
