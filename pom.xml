@@ -27,7 +27,7 @@
         <module>netty</module>
         <module>protobuf</module>
         <module>rocketmq</module>
-        <module>mybatis</module>
+        <module>mybatis-plus</module>
     </modules>
 
     <properties>
