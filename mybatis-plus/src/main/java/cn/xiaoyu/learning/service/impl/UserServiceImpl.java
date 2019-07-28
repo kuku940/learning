@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
  *  服务实现类
- * </p>
  *
  * @author Roin
  * @since 2019-07-17
@@ -22,6 +20,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     private UserMapper userMapper;
 
+    @Override
     public IPage<User> selectUserByPage(Page<User> page){
         return userMapper.selectPageVo(page);
     }

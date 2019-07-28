@@ -2,6 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/learning?useUnicode=true&useSSL=false&characterEncoding=utf8
+    # 使用数据库连接池时使用参数：autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://localhost:3306/learning?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
     username: root
-    password: 12345678
+    password: 123456
