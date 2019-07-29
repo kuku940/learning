@@ -28,6 +28,7 @@
         <module>protobuf</module>
         <module>rocketmq</module>
         <module>mybatis-plus</module>
+        <module>kafka</module>
     </modules>
 
     <properties>
