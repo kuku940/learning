@@ -13,19 +13,21 @@ public class SimpleProducer {
         String topicName = "topic.test";
 
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         // 判断请求是否成功发送
-        props.put("acks", "all");
+        props.put(ProducerConfig.ACKS_CONFIG, "all");
         // 请求失败，生产者重试次数。启动重试，会有重复消息的可能性
-        props.put("retries", 0);
+        props.put(ProducerConfig.RETRIES_CONFIG, 0);
         // 生产者缓存分区未发送的消息
-        props.put("batch.size", 16384);
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
         //
-        props.put("linger.ms", 1);
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 1);
         // 生产者可用的缓存总量
-        props.put("buffer.memory", 33554432);
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+                "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+                "org.apache.kafka.common.serialization.StringSerializer");
 
         Producer<String, String> producer = new KafkaProducer<>(props);
 
