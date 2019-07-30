@@ -19,4 +19,12 @@ public class UrlBean {
   public void setDetail(String detail) {
     this.detail = detail;
   }
+
+  public UrlBean() {
+  }
+
+  public UrlBean(String name, String detail) {
+    this.name = name;
+    this.detail = detail;
+  }
 }
