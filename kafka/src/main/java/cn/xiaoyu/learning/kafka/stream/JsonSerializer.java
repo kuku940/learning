@@ -1,0 +1,31 @@
+package cn.xiaoyu.learning.kafka.stream;
+
+import com.google.gson.Gson;
+import org.apache.kafka.common.serialization.Serializer;
+
+import java.nio.charset.Charset;
+import java.util.Map;
+
+/**
+ * 序列化工具
+ *
+ * @param <T>
+ */
+public class JsonSerializer<T> implements Serializer<T> {
+    private Gson gson = new Gson();
+
+    @Override
+    public void configure(Map<String, ?> configs, boolean isKey) {
+
+    }
+
+    @Override
+    public byte[] serialize(String topic, T data) {
+        return gson.toJson(data).getBytes(Charset.forName("UTF-8"));
+    }
+
+    @Override
+    public void close() {
+
+    }
+}

@@ -18,3 +18,11 @@ kafka分别启动在9091，9092，9093三个端口下的broker
         <artifactId>kafka-streams</artifactId>
         <version>2.3.0</version>
     </dependency>
+
+### Simple结构说明
+
+    SimpleProducer  -   生产消息到topic.in
+    SimpleStream    -   消费topic.in的消息转换为大写，并写入topic.out
+    SimpleConsumer  -   消费SimpleStream写入到topic.out的消息
+    
+###  

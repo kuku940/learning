@@ -14,7 +14,8 @@ import java.util.Properties;
  */
 public class SimpleConsumer {
     public static void main(String[] args) {
-        String topicName = "topic.test";
+//        String topicName = "topic.in";
+        String topicName = "topic.out";
 
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "master:9091,master:9092,master:9093");

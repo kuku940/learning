@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 public class SimpleProducer {
     public static void main(String[] args) {
-        String topicName = "topic.test";
+        String topicName = "topic.in";
 
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "master:9091,master:9092,master:9093");
@@ -36,7 +36,7 @@ public class SimpleProducer {
         for (int i = 0; i < 10; i++) {
             // 创建发送消息记录
             ProducerRecord<String, String> record = new ProducerRecord<>(topicName,
-                    Integer.toString(i), Integer.toString(i));
+                    "key-" + i, "value-" + i);
             // send是异步的，添加消息到缓冲区等待发送，并立即返回 Fire-and-forget
 //            producer.send(record);
             // 阻塞调用 Synchronous send
