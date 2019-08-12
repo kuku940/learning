@@ -14,8 +14,8 @@ import java.util.Properties;
  */
 public class SimpleConsumer {
     public static void main(String[] args) {
-//        String topicName = "topic.in";
-        String topicName = "topic.out";
+        String topicName = "topic.in";
+//        String topicName = "topic.out";
 
         Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "master:9091,master:9092,master:9093");
@@ -51,7 +51,6 @@ public class SimpleConsumer {
                 if (record.offset() % 8 == 0) {
                     consumer.commitSync(currentOffsets, Duration.ofSeconds(1));
                 }
-
             }
 
 //            try {
