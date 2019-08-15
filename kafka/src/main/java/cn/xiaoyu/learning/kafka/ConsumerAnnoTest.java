@@ -10,16 +10,19 @@ import java.util.ServiceLoader;
 
 public class ConsumerAnnoTest {
     public static void main(String[] args) throws Exception {
+        // 通过SPI的方式来获取ConsumerListener的所有子类实现
         ServiceLoader<ConsumerListener> loader = ServiceLoader.load(ConsumerListener.class);
         Iterator<ConsumerListener> iterator = loader.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             ConsumerListener listener = iterator.next();
+            System.out.println(listener.getClass().getName());
             execute(listener.getClass());
         }
     }
 
     /**
      * 获取注释修饰方法，解析groupId和subject并启动线程池
+     *
      * @param clazz
      * @throws Exception
      */

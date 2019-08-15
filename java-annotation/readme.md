@@ -31,3 +31,30 @@ Java提供了4种元注解用于注解其他注解，所有的注解都是基于
 ### @Inherited
 允许子类继承父类中的注解，默认情况下，子类是不继承父类注解的
 
+## 设置默认值    
+
+**设置方法自定义注释并设置默认值** 
+    
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface Person {
+        String name() default "xiaoxiao";
+        GenderEnum gender() default GenderEnum.Female;
+    }
+    enum GenderEnum{
+        Male, Female
+    }
+    
+**使用自定义注释**
+
+    public class Project {
+        @Person
+        public void execute(){
+            System.out.println("method");
+        }
+    }
+    
+## 反射框架Reflections
+通过反射框架Reflections来扫描所有的类并且解析有注释的接口
+
+详见：TestReflections.java
