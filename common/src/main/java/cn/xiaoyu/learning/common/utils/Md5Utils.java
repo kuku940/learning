@@ -13,6 +13,7 @@ import java.util.Random;
  */
 
 public class Md5Utils {
+    private static Random r = new Random();
     /**
      * MD5加密
      *
@@ -25,7 +26,7 @@ public class Md5Utils {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(context.getBytes(encoding));
             byte[] byteHash = md.digest();
-            StringBuffer sTemp = new StringBuffer();
+            StringBuilder builder = new StringBuilder();
             int i;
             for (int offset = 0; offset < byteHash.length; offset++) {
                 i = byteHash[offset];
@@ -33,12 +34,12 @@ public class Md5Utils {
                     i += 256;
                 }
                 if (i < 16) {
-                    sTemp.append("0");
+                    builder.append("0");
                 }
-                sTemp.append(Integer.toHexString(i));
+                builder.append(Integer.toHexString(i));
             }
 
-            return sTemp.toString();
+            return builder.toString();
         } catch (Exception e) {
             throw new BizException(e.getMessage(), e);
         }
@@ -79,20 +80,20 @@ public class Md5Utils {
             // 得到一个信息摘要器
             MessageDigest digest = MessageDigest.getInstance("md5");
             byte[] result = digest.digest(key.getBytes(encoding));
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder builder = new StringBuilder();
             // 把每一个byte 做一个与运算 0xff;
             for (byte b : result) {
                 // 与运算
                 int number = b & 0xff;
                 String str = Integer.toHexString(number);
                 if (str.length() == 1) {
-                    buffer.append("0");
+                    builder.append("0");
                 }
-                buffer.append(str);
+                builder.append(str);
             }
 
             // 标准的md5加密后的结果
-            return buffer.toString();
+            return builder.toString();
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new BizException(e.getMessage(), e);
         }
@@ -105,7 +106,6 @@ public class Md5Utils {
      * 在验证密码时再从48位字符串中按规则提取16位数字，和用户输入的密码相加再MD5。按照这种方法形成的结果肯定是不可直接反查的，且同一个密码每次保存时形成的摘要也都是不同的。
      */
     public static String md5WithSalt(String key, String encoding) {
-        Random r = new Random();
         StringBuilder sb = new StringBuilder(16);
         sb.append(r.nextInt(99999999)).append(r.nextInt(99999999));
         int len = sb.length();

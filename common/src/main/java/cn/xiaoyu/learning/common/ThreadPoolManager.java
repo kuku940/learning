@@ -29,6 +29,7 @@ public class ThreadPoolManager {
                             30000L,
                             TimeUnit.MILLISECONDS,
                             new LinkedBlockingQueue<>(),
+                            // google guava线程池命名工具
                             new ThreadFactoryBuilder().setNameFormat("learning-%d").build());
                 }
             }

@@ -16,6 +16,7 @@ import java.util.Set;
 
 /**
  * @link https://www.programcreek.com/java-api-examples/index.php?api=org.reflections.scanners.MethodAnnotationsScanner
+ * 使用Reflections来反射获取类
  */
 public class TestReflections {
     private static final String DOT = ".";
