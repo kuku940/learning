@@ -2,6 +2,7 @@ package cn.xiaoyu.learning.socket;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Administrator on 2016/10/1.
@@ -20,8 +21,8 @@ public class Client {
         writer.write("eof\n");
         writer.flush();
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));
-        StringBuffer sb = new StringBuffer();
+        BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream(), StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
         String temp;
         int index;
         while ((temp = br.readLine()) != null) {

@@ -75,16 +75,18 @@ public class TestMappedByteBuffer {
         long start = System.currentTimeMillis();
         FileInputStream in = new FileInputStream(srcPath);
         FileOutputStream out = new FileOutputStream(descPath);
+        try {
+            FileChannel srcChannel = in.getChannel();
+            FileChannel descChannel = out.getChannel();
 
-        FileChannel srcChannel = in.getChannel();
-        FileChannel descChannel = out.getChannel();
-
-        MappedByteBuffer mbb = srcChannel.map(FileChannel.MapMode.READ_ONLY, 0, srcChannel.size());
-        descChannel.write(mbb);
-        srcChannel.close();
-        descChannel.close();
-        in.close();
-        out.close();
-        System.out.println("消耗时间：" + (System.currentTimeMillis() - start) + "ms");
+            MappedByteBuffer mbb = srcChannel.map(FileChannel.MapMode.READ_ONLY, 0, srcChannel.size());
+            descChannel.write(mbb);
+            System.out.println("消耗时间：" + (System.currentTimeMillis() - start) + "ms");
+            srcChannel.close();
+            descChannel.close();
+        } finally {
+            in.close();
+            out.close();
+        }
     }
 }

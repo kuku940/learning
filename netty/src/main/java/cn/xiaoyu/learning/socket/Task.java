@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Administrator on 2016/10/8.
@@ -43,12 +44,12 @@ public class Task implements Runnable {
         System.out.println("from client:" + sb);
 
         // 往客户端写入一段话
-        Writer writer = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-        writer.write("Hello Client.");
-        writer.write("eof\n");
-        writer.flush();
+        try (Writer writer = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8)) {
+            writer.write("Hello Client.");
+            writer.write("eof\n");
+            writer.flush();
+        }
 
-        writer.close();
         br.close();
         socket.close();
     }

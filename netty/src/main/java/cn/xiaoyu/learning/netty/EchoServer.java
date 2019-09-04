@@ -31,7 +31,7 @@ public class EchoServer {
     private void start() throws InterruptedException {
         final EchoServerHandler serverHandler = new EchoServerHandler();
         // 配置服务器NIO线程组
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             // 创建ServerBootstrap对象，Netty用于启动NIO服务器的辅助启动类
@@ -42,6 +42,7 @@ public class EchoServer {
                     .channel(NioServerSocketChannel.class)
                     //指定内核为此套接接口排队的最大连接数
                     .option(ChannelOption.SO_BACKLOG, 100)
+                    .childOption(ChannelOption.TCP_NODELAY, true)
                     // 为辅助类和其父类分别指定handler
                     .handler(new LoggingHandler(LogLevel.INFO))
                     // 链路的创建并初始化ChannelPipeline，负责处理网络时间的职责链，复制管理和执行ChannelHandler
