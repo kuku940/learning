@@ -1,5 +1,6 @@
 package cn.xiaoyu.learning.netty.protobuf;
 
+import cn.xiaoyu.ssm.protobuf.SubscribeRespProto;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -14,7 +15,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
 /**
- * Created by roin_zhang on 2016/10/13.
+ * Created by Roin on 2016/10/13.
  */
 public class SubReqClient {
     public static void main(String[] args) throws InterruptedException {

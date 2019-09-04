@@ -1,5 +1,6 @@
 package cn.xiaoyu.learning.netty.protobuf;
 
+import cn.xiaoyu.ssm.protobuf.SubscribeReqProto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -7,12 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by roin_zhang on 2016/10/13.
+ * Created by Roin on 2016/10/13.
  */
 public class SubReqClientHandler extends ChannelInboundHandlerAdapter {
     public SubReqClientHandler() {
     }
 
+    @Override
     public void channelActive(ChannelHandlerContext ctx) {
         for (int i = 0; i < 10; i++) {
             ctx.write(subReq(i));

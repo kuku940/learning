@@ -1,5 +1,7 @@
 package cn.xiaoyu.learning.netty.protobuf;
 
+import cn.xiaoyu.ssm.protobuf.SubscribeReqProto;
+import cn.xiaoyu.ssm.protobuf.SubscribeRespProto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

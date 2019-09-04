@@ -1,7 +1,5 @@
 package cn.xiaoyu.learning.nio;
 
-import org.junit.Test;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -12,8 +10,7 @@ import java.nio.channels.FileChannel;
  * 测试nio中的文件channel
  */
 public class TestFileChannel {
-    @Test
-    public void testReadFile() throws IOException {
+    public static void main(String[] args) throws IOException {
         RandomAccessFile accessFile = new RandomAccessFile("D:/test/1.txt", "rw");
         FileChannel fileChannel = accessFile.getChannel();
 

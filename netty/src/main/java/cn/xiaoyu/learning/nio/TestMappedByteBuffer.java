@@ -1,7 +1,5 @@
 package cn.xiaoyu.learning.nio;
 
-import org.junit.Test;
-
 import java.io.*;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -11,8 +9,7 @@ import java.nio.channels.FileChannel;
  * 使用io,nio以及内存映射 读取拷贝文件的性能比较
  */
 public class TestMappedByteBuffer {
-    @Test
-    public void test() throws IOException {
+    public static void main(String[] args) throws IOException {
         String srcPath = "D:/test/1.pdf";
         String descPath = "D:/test/2.pdf";
 
@@ -26,7 +23,7 @@ public class TestMappedByteBuffer {
         deleteFile(descPath);
     }
 
-    public void deleteFile(String path) {
+    public static void deleteFile(String path) {
         File file = new File(path);
         if (file.exists()) {
             file.delete();
@@ -36,7 +33,7 @@ public class TestMappedByteBuffer {
     /**
      * @throws IOException
      */
-    public void traditionalCopy(String srcPath, String descPath) throws IOException {
+    public static void traditionalCopy(String srcPath, String descPath) throws IOException {
         System.out.println("传统IO读取数据");
         long start = System.currentTimeMillis();
         InputStream in = new FileInputStream(srcPath);
@@ -54,7 +51,7 @@ public class TestMappedByteBuffer {
         System.out.println("消耗时间：" + (System.currentTimeMillis() - start) + "ms");
     }
 
-    public void testNioCopyFile(String srcPath, String descPath) throws IOException {
+    public static void testNioCopyFile(String srcPath, String descPath) throws IOException {
         System.out.println("NIO拷贝数据");
         long start = System.currentTimeMillis();
         FileInputStream in = new FileInputStream(srcPath);
@@ -73,7 +70,7 @@ public class TestMappedByteBuffer {
         System.out.println("消耗时间：" + (System.currentTimeMillis() - start) + "ms");
     }
 
-    public void testMappedByteBuffer(String srcPath, String descPath) throws IOException {
+    public static void testMappedByteBuffer(String srcPath, String descPath) throws IOException {
         System.out.println("内存映射拷贝数据");
         long start = System.currentTimeMillis();
         FileInputStream in = new FileInputStream(srcPath);
