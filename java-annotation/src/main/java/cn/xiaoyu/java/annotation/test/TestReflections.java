@@ -8,6 +8,7 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -22,7 +23,7 @@ public class TestReflections {
     private static final String DOT = ".";
 
     public static void main(String[] args) throws Exception {
-        Collection<Method> methods = getMethods();
+        Collection<Method> methods = getMethods("cn.xiaoyu");
         for (Method method : methods) {
             if (method.isAnnotationPresent(Person.class)) {
                 // 获取方法注释并且反射实例化并执行
@@ -49,6 +50,21 @@ public class TestReflections {
                         .setScanners(new MethodAnnotationsScanner(), new TypeAnnotationsScanner())
                         .addClassLoader(Thread.currentThread().getContextClassLoader())
                         .filterInputsBy(in -> in.endsWith("java") || in.endsWith("class")))
+                .getMethodsAnnotatedWith(Person.class);
+    }
+
+    /**
+     * 获取指定包下被Person注释修饰的方法
+     * @param pack
+     * @return
+     */
+    public static Collection<Method> getMethods(String pack) {
+        return new Reflections(
+                new ConfigurationBuilder()
+                        .addUrls(ClasspathHelper.forPackage(pack))
+                        .setScanners(new MethodAnnotationsScanner())
+                        .addClassLoader(Thread.currentThread().getContextClassLoader())
+                        .filterInputsBy(new FilterBuilder().includePackage(pack)))
                 .getMethodsAnnotatedWith(Person.class);
     }
 
