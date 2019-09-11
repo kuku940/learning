@@ -5,6 +5,8 @@ import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
@@ -14,9 +16,11 @@ import java.sql.*;
  * @link {https://www.twblogs.net/a/5b81d9212b71772165ae977a/zh-cn}
  */
 public class JDBCPool {
+    private static final Logger LOG = LoggerFactory.getLogger(JDBCPool.class);
+
     private static final String URL = "jdbc:mysql://localhost:3306/learning";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "123456";
+    private static final String PASSW = "12345678";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
     private volatile static JDBCPool pool;
@@ -94,13 +98,13 @@ public class JDBCPool {
             try {
                 Class.forName(DRIVER);
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                LOG.error(e.getMessage(), e);
             }
         }
 
         @Override
         public Connection create() throws Exception {
-            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            return DriverManager.getConnection(URL, USERNAME, PASSW);
         }
 
         @Override
@@ -112,16 +116,10 @@ public class JDBCPool {
     public static void main(String[] args) {
         try {
             for (int i = 0; i < 200; i++) {
-//               // 1 单线程不归还连接
-//               Connection conn = JDBCPool.getInstance().getConnection();
-//               System.out.println(conn.hashCode());
-//               // 2 单线程归还连接
-//               JDBCPool.returnConnection(conn);
-                // 3 多线程不归还
                 new Thread(new PoolTestThread()).start();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -131,13 +129,11 @@ public class JDBCPool {
         public void run() {
             try {
                 Connection conn = JDBCPool.getInstance().getConnection();
-                System.out.println(Thread.currentThread().getName() + " : "
-                        + conn.hashCode());
-                // 4 多线程归还连接
+                LOG.info(Thread.currentThread().getName() + " : " + conn.hashCode());
                 Thread.sleep(1000);
                 JDBCPool.returnConnection(conn);
             } catch (Exception e) {
-                e.printStackTrace();
+                LOG.error(e.getMessage(), e);
             }
         }
 

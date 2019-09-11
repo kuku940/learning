@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 
@@ -12,6 +14,7 @@ import java.text.SimpleDateFormat;
  * @date 2019-08-19
  */
 public final class JacksonUtils {
+    private static final Logger LOG = LoggerFactory.getLogger(JacksonUtils.class);
 
     private JacksonUtils() {
     }
@@ -38,7 +41,7 @@ public final class JacksonUtils {
                 return jackson.readValue(json, clazz);
             }
         } catch (Exception ex) {
-
+            LOG.error(ex.getMessage(), ex);
         }
         return null;
     }
