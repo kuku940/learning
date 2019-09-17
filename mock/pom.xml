@@ -13,13 +13,6 @@
     <description>Java的Mock测试框架</description>
 
     <dependencies>
-        <!-- EasyMock -->
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>3.6</version>
-        </dependency>
-
         <!-- mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
