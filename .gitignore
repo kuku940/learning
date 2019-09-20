@@ -9,3 +9,6 @@ target/
 .settings/
 .classpath
 .project
+
+# Jooq generate code #
+jooq/src/main/java/cn/xiaoyu/learning/data/jooq/
