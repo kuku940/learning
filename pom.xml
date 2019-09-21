@@ -91,8 +91,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <target>9</target>
-                    <source>9</source>
+                    <target>8</target>
+                    <source>8</source>
                 </configuration>
             </plugin>
         </plugins>

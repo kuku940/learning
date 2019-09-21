@@ -67,7 +67,7 @@ public class JooqTest {
     private DSLContext getDSLContext() {
         try {
             Connection connection =
-                    DriverManager.getConnection("jdbc:mysql://localhost:3306/payment", "root", "12345678");
+                    DriverManager.getConnection("jdbc:mysql://localhost:3306/learning?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT", "root", "123456");
             return DSL.using(connection, SQLDialect.MYSQL);
         } catch (Exception e) {
             e.printStackTrace();
