@@ -21,7 +21,7 @@ public class NettyClient {
     private static final Log LOGGER = LogFactory.getLog(NettyClient.class);
     private static final int MAX_RETRY = 3;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Bootstrap bootstrap = new Bootstrap();
         NioEventLoopGroup group = new NioEventLoopGroup();
 
@@ -33,7 +33,7 @@ public class NettyClient {
                     @Override
                     protected void initChannel(Channel channel) throws Exception {
                         LOGGER.info(channel.attr(AttributeKey.valueOf("clientName")) + "启动成功");
-                        channel.pipeline().addLast(new FirstClientHandler());
+                        channel.pipeline().addLast(new ClientHandler());
                     }
                 })
                 // 设置TCP底层相关属性

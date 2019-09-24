@@ -43,7 +43,7 @@ public class NettyServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         LOGGER.info(AttributeKey.valueOf("childName") + "处理器处理中");
-                        ch.pipeline().addLast(new FirstServerHandler());
+                        ch.pipeline().addLast(new ServerHandler());
                     }
                 })
                 // 设置TCP底层相关属性

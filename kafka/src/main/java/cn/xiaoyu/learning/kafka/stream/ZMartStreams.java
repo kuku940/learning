@@ -60,12 +60,12 @@ public class ZMartStreams {
                 .filter((key, purchase) -> purchase.getPrice() > 5.00);
         filteredStream.to("purchases", Produced.with(stringSerde, purchaseSerde));
 
-//        // 处理器:将电子产品和咖啡的销售数据分离
-//        KStream<String, Purchase>[] kstreamByDept = purchaseKStream.branch(
-//                (key, purchase) -> purchase.getDepartment().equalsIgnoreCase("coffee"),
-//                (key, purchase) -> purchase.getDepartment().equalsIgnoreCase("electronics"));
-//        kstreamByDept[0].to("coffee", Produced.with(stringSerde, purchaseSerde));
-//        kstreamByDept[1].to("electronics", Produced.with(stringSerde, purchaseSerde));
+        // 处理器:将电子产品和咖啡的销售数据分离
+        KStream<String, Purchase>[] kstreamByDept = purchaseKStream.branch(
+                (key, purchase) -> purchase.getDepartment().equalsIgnoreCase("coffee"),
+                (key, purchase) -> purchase.getDepartment().equalsIgnoreCase("electronics"));
+        kstreamByDept[0].to("coffee", Produced.with(stringSerde, purchaseSerde));
+        kstreamByDept[1].to("electronics", Produced.with(stringSerde, purchaseSerde));
 
         // 控制台打印消费者输出结果
         patternKStream.print(Printed.<String, PurchasePattern>toSysOut().withLabel("patterns"));
@@ -73,7 +73,8 @@ public class ZMartStreams {
         filteredStream.print(Printed.<String, Purchase>toSysOut().withLabel("purchases"));
 
         // 创建和启动KStream
-        KafkaStreams streams = new KafkaStreams(builder.build(), props);
-        streams.start();
+        try (KafkaStreams streams = new KafkaStreams(builder.build(), props)) {
+            streams.start();
+        }
     }
 }
