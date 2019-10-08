@@ -19,7 +19,7 @@ public class TestProtobuf2Json {
                 .build();
 
         // proto to json
-        String json = JsonFormat.printer().print(u);
+        String json = JsonFormat.printer().includingDefaultValueFields().print(u);
         System.out.println(json);
 
         // json to proto
