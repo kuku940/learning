@@ -13,6 +13,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>cn.xiaoyu</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.41.Final</version>

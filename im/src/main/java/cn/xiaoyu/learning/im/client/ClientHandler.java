@@ -1,11 +1,13 @@
 package cn.xiaoyu.learning.im.client;
 
+import cn.xiaoyu.learning.im.protocol.command.Packet;
 import cn.xiaoyu.learning.im.protocol.command.PacketCodeC;
 import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
+import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
+import cn.xiaoyu.learning.im.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.CharsetUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -53,6 +55,19 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf byteBuf = (ByteBuf) msg;
 
-        LOGGER.info(new Date() + ": 客户端读取到数据 -> " + byteBuf.toString(CharsetUtil.UTF_8));
+        Packet packet = PacketCodeC.INSTANCE.decode(byteBuf);
+        if (packet instanceof LoginRequestPacket) {
+            LoginRequestPacket loginRequestPacket = (LoginRequestPacket) packet;
+
+            if (loginRequestPacket.isSuccess()) {
+                LOGGER.info(new Date() + ": 客户端登录成功");
+                LoginUtil.markAsLogin(ctx.channel());
+            } else {
+                LOGGER.info(new Date() + ": 客户端登录失败，原因：" + loginRequestPacket.getReason());
+            }
+        } else if (packet instanceof MessageRequestPacket) {
+            MessageRequestPacket messageRequestPacket = (MessageRequestPacket) packet;
+            LOGGER.info(new Date() + ": 收到服务端的消息：" + messageRequestPacket.getMessage());
+        }
     }
 }

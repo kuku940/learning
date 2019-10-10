@@ -1,7 +1,13 @@
 package cn.xiaoyu.learning.im.client;
 
+import cn.xiaoyu.learning.common.ThreadPoolManager;
+import cn.xiaoyu.learning.im.protocol.command.PacketCodeC;
+import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
+import cn.xiaoyu.learning.im.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -11,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.Date;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -48,12 +55,30 @@ public class NettyClient {
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
                 LOGGER.info("连接成功");
+                Channel channel = ((ChannelFuture) future).channel();
+                startConsoleThread(channel);
             } else if (retry == 0) {
                 LOGGER.info("重试次数已用完，放弃连接");
             } else {
                 int order = (MAX_RETRY - retry) + 1;
                 LOGGER.info(new Date() + "连接失败，第" + order + "次重连");
                 bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), 1 << order, TimeUnit.SECONDS);
+            }
+        });
+    }
+
+    private static void startConsoleThread(Channel channel) {
+        ThreadPoolManager.getInstance().submit(() -> {
+            while (!Thread.interrupted()) {
+                if (LoginUtil.hasLogin(channel)) {
+                    LOGGER.info("输入消息发送至服务端：");
+                    Scanner sc = new Scanner(System.in);
+                    String line = sc.nextLine();
+                    MessageRequestPacket packet = new MessageRequestPacket();
+                    packet.setMessage(line);
+                    ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc(), packet);
+                    channel.writeAndFlush(byteBuf);
+                }
             }
         });
     }

@@ -3,7 +3,9 @@ package cn.xiaoyu.learning.im.server;
 import cn.xiaoyu.learning.im.protocol.command.Packet;
 import cn.xiaoyu.learning.im.protocol.command.PacketCodeC;
 import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
+import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
+import cn.xiaoyu.learning.im.protocol.response.MessageResponsePacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -33,8 +35,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         // 解码
         Packet packet = PacketCodeC.INSTANCE.decode(requestByteBuf);
 
-        // 判断是否是登陆请求数据包
         if (packet instanceof LoginRequestPacket) {
+            // 处理登陆请求数据包
             LoginRequestPacket loginRequestPacket = (LoginRequestPacket) packet;
 
             LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
@@ -51,6 +53,15 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             // 登录响应
             ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc(), loginResponsePacket);
             ctx.channel().writeAndFlush(byteBuf);
+        } else if (packet instanceof MessageRequestPacket) {
+            // 处理消息请求数据包
+            MessageRequestPacket messageRequestPacket = (MessageRequestPacket) packet;
+            LOGGER.info(new Date() + ": 收到客户端消息：" + messageRequestPacket.getMessage());
+
+            MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
+            messageResponsePacket.setMessage("服务端回复：" + messageRequestPacket.getMessage());
+            ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc(), messageRequestPacket);
+            ctx.channel().writeAndFlush(responseByteBuf);
         }
     }
 
