@@ -4,6 +4,7 @@ import cn.xiaoyu.learning.im.protocol.command.Packet;
 import cn.xiaoyu.learning.im.protocol.command.PacketCodeC;
 import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
 import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
+import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
 import cn.xiaoyu.learning.im.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -56,14 +57,14 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf byteBuf = (ByteBuf) msg;
 
         Packet packet = PacketCodeC.INSTANCE.decode(byteBuf);
-        if (packet instanceof LoginRequestPacket) {
-            LoginRequestPacket loginRequestPacket = (LoginRequestPacket) packet;
+        if (packet instanceof LoginResponsePacket) {
+            LoginResponsePacket loginResponsePacket = (LoginResponsePacket) packet;
 
-            if (loginRequestPacket.isSuccess()) {
+            if (loginResponsePacket.isSuccess()) {
                 LOGGER.info(new Date() + ": 客户端登录成功");
                 LoginUtil.markAsLogin(ctx.channel());
             } else {
-                LOGGER.info(new Date() + ": 客户端登录失败，原因：" + loginRequestPacket.getReason());
+                LOGGER.info(new Date() + ": 客户端登录失败，原因：" + loginResponsePacket.getReason());
             }
         } else if (packet instanceof MessageRequestPacket) {
             MessageRequestPacket messageRequestPacket = (MessageRequestPacket) packet;
