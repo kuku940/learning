@@ -7,6 +7,7 @@ import mockit.Mock;
 import mockit.MockUp;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  * @author Roin zhang
  * @date 2018/7/25
  */
-
+@RunWith(JMockit.class)
 public class GenericMockUpTest {
     @Test
     public <T extends AnOrdinaryInterface> void testMockUp() {

@@ -12,6 +12,10 @@
     <artifactId>mock</artifactId>
     <description>Java的Mock测试框架</description>
 
+    <properties>
+        <jmockit.version>1.42</jmockit.version>
+    </properties>
+
     <dependencies>
         <!-- mockito -->
         <dependency>
@@ -36,7 +40,7 @@
         <dependency>
             <groupId>org.jmockit</groupId>
             <artifactId>jmockit</artifactId>
-            <version>1.40</version>
+            <version>${jmockit.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -47,21 +51,21 @@
 
     <build>
         <plugins>
-            <!-- JMockit的代码覆盖率 -->
-            <!--<plugin>-->
-                <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<argLine>-->
-                        <!-- -javaagent:"${settings.localRepository}/org/jmockit/jmockit/1.40/jmockit-1.40.jar=coverage"-->
-                    <!--</argLine>-->
-                    <!--<disableXmlReport>false</disableXmlReport>-->
-                    <!--<systemPropertyVariables>-->
-                        <!--<coverage-output>html</coverage-output>-->
-                        <!--<coverage-outputDir>${project.build.directory}/codecoverage-output</coverage-outputDir>-->
-                        <!--<coverage-metrics>all</coverage-metrics>-->
-                    <!--</systemPropertyVariables>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            JMockit的代码覆盖率
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar=coverage"
+                    </argLine>
+                    <disableXmlReport>false</disableXmlReport>
+                    <systemPropertyVariables>
+                        <coverage-output>html</coverage-output>
+                        <coverage-outputDir>${project.build.directory}/codecoverage-output</coverage-outputDir>
+                        <coverage-metrics>all</coverage-metrics>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
