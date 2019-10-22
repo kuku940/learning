@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <artifactId>learning</artifactId>
         <groupId>cn.xiaoyu</groupId>
@@ -13,7 +14,9 @@
     <description>Java的Mock测试框架</description>
 
     <properties>
-        <jmockit.version>1.42</jmockit.version>
+        <jmockit.version>1.41</jmockit.version>
+        <testcontainer.version>1.12.2</testcontainer.version>
+        <powermock.version>1.7.4</powermock.version>
     </properties>
 
     <dependencies>
@@ -28,12 +31,12 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito</artifactId>
-            <version>1.7.4</version>
+            <version>${powermock.version}</version>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.7.4</version>
+            <version>${powermock.version}</version>
         </dependency>
 
         <!-- jmockit 请确保JMockit的依赖定义出现在JUnit的依赖之前 -->
@@ -47,11 +50,54 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+
+        <!-- testContainers -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${testcontainer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>kafka</artifactId>
+            <version>${testcontainer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mysql</artifactId>
+            <version>${testcontainer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mockserver</artifactId>
+            <version>${testcontainer.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mock-server</groupId>
+            <artifactId>mockserver-client-java</artifactId>
+            <version>5.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            JMockit的代码覆盖率
+            <!-- JMockit的代码覆盖率 -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -68,5 +114,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

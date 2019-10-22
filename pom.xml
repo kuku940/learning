@@ -32,6 +32,7 @@
         <module>java</module>
         <module>im</module>
         <module>jooq</module>
+        <module>dropwizardGuice</module>
     </modules>
 
     <properties>
