@@ -1,6 +1,8 @@
 package cn.xiaoyu.learning.im.protocol.command;
 
 /**
+ * 指令类型
+ *
  * @author roin.zhang
  * @date 2019/9/24
  */

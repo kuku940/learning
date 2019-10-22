@@ -1,6 +1,8 @@
 package cn.xiaoyu.learning.im.serialize;
 
 /**
+ * 序列化算法
+ *
  * @author roin.zhang
  * @date 2019/9/24
  */

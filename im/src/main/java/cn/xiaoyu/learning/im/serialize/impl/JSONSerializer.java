@@ -5,6 +5,8 @@ import cn.xiaoyu.learning.im.serialize.SerializerAlgorithm;
 import com.alibaba.fastjson.JSON;
 
 /**
+ * Json方式序列化
+ *
  * @author roin.zhang
  * @date 2019/9/24
  */

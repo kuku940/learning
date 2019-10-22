@@ -54,7 +54,7 @@ public class NettyClient {
     private static void connect(final Bootstrap bootstrap, final String host, final int port, int retry) {
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
-                LOGGER.info("连接成功");
+                LOGGER.info("客户端连接成功");
                 Channel channel = ((ChannelFuture) future).channel();
                 startConsoleThread(channel);
             } else if (retry == 0) {

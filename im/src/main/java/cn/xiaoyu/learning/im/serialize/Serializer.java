@@ -3,6 +3,8 @@ package cn.xiaoyu.learning.im.serialize;
 import cn.xiaoyu.learning.im.serialize.impl.JSONSerializer;
 
 /**
+ * 序列化工具
+ *
  * @author roin.zhang
  * @date 2019/9/24
  */
