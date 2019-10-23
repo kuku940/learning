@@ -2,6 +2,7 @@ package cn.xiaoyu.learning.im.server.handler;
 
 import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
+import cn.xiaoyu.learning.im.util.LoginUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.commons.logging.Log;
@@ -26,6 +27,7 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         loginRequestPacket.setVersion(loginRequestPacket.getVersion());
         if (vaild(loginRequestPacket)) {
             loginResponsePacket.setSuccess(true);
+            LoginUtil.markAsLogin(ctx.channel());
             LOGGER.info(new Date() + ": 登录成功");
         } else {
             loginResponsePacket.setSuccess(false);

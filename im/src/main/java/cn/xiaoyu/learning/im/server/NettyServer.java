@@ -3,6 +3,7 @@ package cn.xiaoyu.learning.im.server;
 import cn.xiaoyu.learning.im.codec.PacketDecoder;
 import cn.xiaoyu.learning.im.codec.PacketEncoder;
 import cn.xiaoyu.learning.im.codec.Spliter;
+import cn.xiaoyu.learning.im.server.handler.AuthHandler;
 import cn.xiaoyu.learning.im.server.handler.LoginRequestHandler;
 import cn.xiaoyu.learning.im.server.handler.MessageRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
@@ -52,6 +53,8 @@ public class NettyServer {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
+                        // 新增用户认证handler
+                        ch.pipeline().addLast(new AuthHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }

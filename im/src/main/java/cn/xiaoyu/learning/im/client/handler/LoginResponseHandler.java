@@ -41,4 +41,9 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
             LOGGER.info(new Date() + ": 客户端登录失败，原因：" + loginResponsePacket.getReason());
         }
     }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        LOGGER.info("客户端连接被关闭");
+    }
 }
