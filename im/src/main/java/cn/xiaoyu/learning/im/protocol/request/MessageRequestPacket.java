@@ -1,6 +1,6 @@
 package cn.xiaoyu.learning.im.protocol.request;
 
-import cn.xiaoyu.learning.im.protocol.command.Packet;
+import cn.xiaoyu.learning.im.protocol.Packet;
 import lombok.Data;
 
 import static cn.xiaoyu.learning.im.protocol.command.Command.MESSAGE_REQUEST;

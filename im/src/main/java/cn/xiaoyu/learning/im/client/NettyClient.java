@@ -1,11 +1,13 @@
 package cn.xiaoyu.learning.im.client;
 
 import cn.xiaoyu.learning.common.ThreadPoolManager;
-import cn.xiaoyu.learning.im.protocol.command.PacketCodeC;
+import cn.xiaoyu.learning.im.client.handler.LoginResponseHandler;
+import cn.xiaoyu.learning.im.client.handler.MessageResponseHandler;
+import cn.xiaoyu.learning.im.codec.PacketDecoder;
+import cn.xiaoyu.learning.im.codec.PacketEncoder;
 import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
 import cn.xiaoyu.learning.im.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -40,7 +42,10 @@ public class NettyClient {
                     @Override
                     protected void initChannel(Channel channel) throws Exception {
                         LOGGER.info(channel.attr(AttributeKey.valueOf("clientName")) + "启动成功");
-                        channel.pipeline().addLast(new ClientHandler());
+                        channel.pipeline().addLast(new PacketDecoder());
+                        channel.pipeline().addLast(new LoginResponseHandler());
+                        channel.pipeline().addLast(new MessageResponseHandler());
+                        channel.pipeline().addLast(new PacketEncoder());
                     }
                 })
                 // 设置TCP底层相关属性
@@ -76,8 +81,7 @@ public class NettyClient {
                     String line = sc.nextLine();
                     MessageRequestPacket packet = new MessageRequestPacket();
                     packet.setMessage(line);
-                    ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc(), packet);
-                    channel.writeAndFlush(byteBuf);
+                    channel.writeAndFlush(packet);
                 }
             }
         });

@@ -1,4 +1,4 @@
-package cn.xiaoyu.learning.im.protocol.command;
+package cn.xiaoyu.learning.im.protocol;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

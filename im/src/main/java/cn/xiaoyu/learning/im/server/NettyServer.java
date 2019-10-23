@@ -1,5 +1,9 @@
 package cn.xiaoyu.learning.im.server;
 
+import cn.xiaoyu.learning.im.codec.PacketDecoder;
+import cn.xiaoyu.learning.im.codec.PacketEncoder;
+import cn.xiaoyu.learning.im.server.handler.LoginRequestHandler;
+import cn.xiaoyu.learning.im.server.handler.MessageRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -43,7 +47,10 @@ public class NettyServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         LOGGER.info(AttributeKey.valueOf("childName") + "处理器处理中");
-                        ch.pipeline().addLast(new ServerHandler());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 })
                 // 设置TCP底层相关属性
