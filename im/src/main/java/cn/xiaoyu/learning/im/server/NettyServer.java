@@ -2,6 +2,7 @@ package cn.xiaoyu.learning.im.server;
 
 import cn.xiaoyu.learning.im.codec.PacketDecoder;
 import cn.xiaoyu.learning.im.codec.PacketEncoder;
+import cn.xiaoyu.learning.im.codec.Spliter;
 import cn.xiaoyu.learning.im.server.handler.LoginRequestHandler;
 import cn.xiaoyu.learning.im.server.handler.MessageRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
@@ -47,6 +48,8 @@ public class NettyServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         LOGGER.info(AttributeKey.valueOf("childName") + "处理器处理中");
+                        // 自定义拆包处理器 + 是否支持自定义协议的客户端
+                        ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());

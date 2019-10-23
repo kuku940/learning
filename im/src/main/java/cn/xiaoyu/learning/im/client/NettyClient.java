@@ -5,6 +5,7 @@ import cn.xiaoyu.learning.im.client.handler.LoginResponseHandler;
 import cn.xiaoyu.learning.im.client.handler.MessageResponseHandler;
 import cn.xiaoyu.learning.im.codec.PacketDecoder;
 import cn.xiaoyu.learning.im.codec.PacketEncoder;
+import cn.xiaoyu.learning.im.codec.Spliter;
 import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
 import cn.xiaoyu.learning.im.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
@@ -40,12 +41,14 @@ public class NettyClient {
                 .attr(AttributeKey.newInstance("clientName"), "nettyClient")
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
-                    protected void initChannel(Channel channel) throws Exception {
-                        LOGGER.info(channel.attr(AttributeKey.valueOf("clientName")) + "启动成功");
-                        channel.pipeline().addLast(new PacketDecoder());
-                        channel.pipeline().addLast(new LoginResponseHandler());
-                        channel.pipeline().addLast(new MessageResponseHandler());
-                        channel.pipeline().addLast(new PacketEncoder());
+                    protected void initChannel(Channel ch) throws Exception {
+                        LOGGER.info(ch.attr(AttributeKey.valueOf("clientName")) + "启动成功");
+                        // 自定义拆包处理器 + 是否支持自定义协议的客户端
+                        ch.pipeline().addLast(new Spliter());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 })
                 // 设置TCP底层相关属性
