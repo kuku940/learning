@@ -13,7 +13,6 @@ import org.apache.commons.logging.LogFactory;
 public class MessageResponseHandler extends SimpleChannelInboundHandler<MessageResponsePacket> {
     private static final Log LOGGER = LogFactory.getLog(MessageResponseHandler.class);
 
-
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageResponsePacket messageResponsePacket) throws Exception {
         String fromUserId = messageResponsePacket.getFromUserId();

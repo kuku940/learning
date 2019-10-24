@@ -1,13 +1,15 @@
 package cn.xiaoyu.learning.im.client;
 
 import cn.xiaoyu.learning.common.ThreadPoolManager;
+import cn.xiaoyu.learning.im.client.console.ConsoleCommandMananger;
+import cn.xiaoyu.learning.im.client.console.LoginConsoleCommand;
+import cn.xiaoyu.learning.im.client.handler.CreateGroupResponseHandler;
 import cn.xiaoyu.learning.im.client.handler.LoginResponseHandler;
+import cn.xiaoyu.learning.im.client.handler.LogoutResponseHandler;
 import cn.xiaoyu.learning.im.client.handler.MessageResponseHandler;
 import cn.xiaoyu.learning.im.codec.PacketDecoder;
 import cn.xiaoyu.learning.im.codec.PacketEncoder;
 import cn.xiaoyu.learning.im.codec.Spliter;
-import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
-import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
 import cn.xiaoyu.learning.im.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -48,7 +50,9 @@ public class NettyClient {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new LogoutResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new CreateGroupResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 })
@@ -77,36 +81,18 @@ public class NettyClient {
     }
 
     private static void startConsoleThread(Channel channel) {
+        ConsoleCommandMananger consoleCommandMananger = new ConsoleCommandMananger();
+        LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
         Scanner sc = new Scanner(System.in);
-        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
         ThreadPoolManager.getInstance().submit(() -> {
             while (!Thread.interrupted()) {
                 if (SessionUtil.hasLogin(channel)) {
-                    LOGGER.info("要发送用户userId:");
-                    String toUserId = sc.nextLine();
-                    LOGGER.info("需要发送消息：");
-                    String msg = sc.nextLine();
-
-                    channel.writeAndFlush(new MessageRequestPacket(toUserId, msg));
+                    LOGGER.info("输入执行指令：" + consoleCommandMananger.getConsoleCommandMap().keySet());
+                    consoleCommandMananger.exec(sc, channel);
                 } else {
-                    LOGGER.info("输入用户名登录：");
-                    String username = sc.nextLine();
-                    loginRequestPacket.setUsername(username);
-                    loginRequestPacket.setPassword("123456");
-
-                    // 发送登录数据包
-                    channel.writeAndFlush(loginRequestPacket);
-                    waitForLoginResponse();
+                    loginConsoleCommand.exec(sc, channel);
                 }
             }
         });
-    }
-
-    private static void waitForLoginResponse() {
-        try {
-            Thread.sleep(1000);
-        } catch (Exception ex) {
-            LOGGER.error(ex);
-        }
     }
 }

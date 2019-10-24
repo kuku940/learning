@@ -3,6 +3,7 @@ package cn.xiaoyu.learning.im.server.handler;
 import cn.xiaoyu.learning.im.common.Session;
 import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
+import cn.xiaoyu.learning.im.util.IdGenerateUtil;
 import cn.xiaoyu.learning.im.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -10,7 +11,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * 登录请求处理器
@@ -30,7 +30,7 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         loginResponsePacket.setUserName(loginRequestPacket.getUsername());
         if (vaild(loginRequestPacket)) {
             loginResponsePacket.setSuccess(true);
-            String userId = randomUserId();
+            String userId = IdGenerateUtil.randomId();
             loginResponsePacket.setUserId(userId);
             SessionUtil.bindSession(new Session(userId, loginRequestPacket.getUsername()), ctx.channel());
             LOGGER.info("[" + loginRequestPacket.getUsername() + "]登录成功");
@@ -46,13 +46,6 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
 
     private boolean vaild(LoginRequestPacket loginRequestPacket) {
         return "123456".equals(loginRequestPacket.getPassword());
-    }
-
-    /**
-     * @return 随机用户Id
-     */
-    private static String randomUserId() {
-        return UUID.randomUUID().toString().split("-")[0];
     }
 
     /**

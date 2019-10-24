@@ -1,9 +1,13 @@
 package cn.xiaoyu.learning.im.protocol;
 
 import cn.xiaoyu.learning.im.protocol.command.Command;
+import cn.xiaoyu.learning.im.protocol.request.CreateGroupRequestPacket;
 import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
+import cn.xiaoyu.learning.im.protocol.request.LogoutRequestPacket;
 import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
+import cn.xiaoyu.learning.im.protocol.response.CreateGroupResponsePacket;
 import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
+import cn.xiaoyu.learning.im.protocol.response.LogoutResponsePacket;
 import cn.xiaoyu.learning.im.protocol.response.MessageResponsePacket;
 import cn.xiaoyu.learning.im.serialize.Serializer;
 import cn.xiaoyu.learning.im.serialize.impl.JSONSerializer;
@@ -38,6 +42,10 @@ public class PacketCodeC {
         packetTypeMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
         packetTypeMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
         packetTypeMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
+        packetTypeMap.put(Command.LOGOUT_REQUEST, LogoutRequestPacket.class);
+        packetTypeMap.put(Command.LOGOUT_RESPONSE, LogoutResponsePacket.class);
+        packetTypeMap.put(Command.CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class);
+        packetTypeMap.put(Command.CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();

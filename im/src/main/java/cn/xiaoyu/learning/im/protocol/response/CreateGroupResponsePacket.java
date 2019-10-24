@@ -6,22 +6,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author roin.zhang
- * @date 2019/9/24
+ * @date 2019/10/24
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponsePacket extends Packet {
+public class CreateGroupResponsePacket extends Packet {
     private boolean success;
-
-    private String reason;
-    private String userId;
-    private String userName;
+    private String groupId;
+    private List<String> userNames;
 
     @Override
     public Byte getCommand() {
-        return Command.LOGIN_RESPONSE;
+        return Command.CREATE_GROUP_RESPONSE;
     }
 }
