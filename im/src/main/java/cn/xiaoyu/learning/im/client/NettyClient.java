@@ -3,10 +3,7 @@ package cn.xiaoyu.learning.im.client;
 import cn.xiaoyu.learning.common.ThreadPoolManager;
 import cn.xiaoyu.learning.im.client.console.ConsoleCommandMananger;
 import cn.xiaoyu.learning.im.client.console.LoginConsoleCommand;
-import cn.xiaoyu.learning.im.client.handler.CreateGroupResponseHandler;
-import cn.xiaoyu.learning.im.client.handler.LoginResponseHandler;
-import cn.xiaoyu.learning.im.client.handler.LogoutResponseHandler;
-import cn.xiaoyu.learning.im.client.handler.MessageResponseHandler;
+import cn.xiaoyu.learning.im.client.handler.*;
 import cn.xiaoyu.learning.im.codec.PacketDecoder;
 import cn.xiaoyu.learning.im.codec.PacketEncoder;
 import cn.xiaoyu.learning.im.codec.Spliter;
@@ -50,9 +47,12 @@ public class NettyClient {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginResponseHandler());
-                        ch.pipeline().addLast(new LogoutResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new CreateGroupResponseHandler());
+                        ch.pipeline().addLast(new JoinGroupResponseHandler());
+                        ch.pipeline().addLast(new QuitGroupResponseHandler());
+                        ch.pipeline().addLast(new ListGroupMembersResponseHandler());
+                        ch.pipeline().addLast(new LogoutResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 })

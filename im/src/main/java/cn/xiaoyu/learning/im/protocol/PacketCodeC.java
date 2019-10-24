@@ -1,14 +1,8 @@
 package cn.xiaoyu.learning.im.protocol;
 
 import cn.xiaoyu.learning.im.protocol.command.Command;
-import cn.xiaoyu.learning.im.protocol.request.CreateGroupRequestPacket;
-import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
-import cn.xiaoyu.learning.im.protocol.request.LogoutRequestPacket;
-import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
-import cn.xiaoyu.learning.im.protocol.response.CreateGroupResponsePacket;
-import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
-import cn.xiaoyu.learning.im.protocol.response.LogoutResponsePacket;
-import cn.xiaoyu.learning.im.protocol.response.MessageResponsePacket;
+import cn.xiaoyu.learning.im.protocol.request.*;
+import cn.xiaoyu.learning.im.protocol.response.*;
 import cn.xiaoyu.learning.im.serialize.Serializer;
 import cn.xiaoyu.learning.im.serialize.impl.JSONSerializer;
 import io.netty.buffer.ByteBuf;
@@ -46,6 +40,12 @@ public class PacketCodeC {
         packetTypeMap.put(Command.LOGOUT_RESPONSE, LogoutResponsePacket.class);
         packetTypeMap.put(Command.CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class);
         packetTypeMap.put(Command.CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
+        packetTypeMap.put(Command.JOIN_GROUP_REQUEST, JoinGroupRequestPacket.class);
+        packetTypeMap.put(Command.JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class);
+        packetTypeMap.put(Command.QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class);
+        packetTypeMap.put(Command.QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
+        packetTypeMap.put(Command.LIST_GROUP_MEMBERS_REQUEST, ListGroupMembersRequestPacket.class);
+        packetTypeMap.put(Command.LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
