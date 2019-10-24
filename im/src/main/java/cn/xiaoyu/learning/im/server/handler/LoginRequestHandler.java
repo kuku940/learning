@@ -1,14 +1,16 @@
 package cn.xiaoyu.learning.im.server.handler;
 
+import cn.xiaoyu.learning.im.common.Session;
 import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
-import cn.xiaoyu.learning.im.util.LoginUtil;
+import cn.xiaoyu.learning.im.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * 登录请求处理器
@@ -20,15 +22,18 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
     private static final Log LOGGER = LogFactory.getLog(LoginRequestHandler.class);
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) {
         LOGGER.info(new Date() + ": 客户端开始登录");
 
         LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
-        loginRequestPacket.setVersion(loginRequestPacket.getVersion());
+        loginResponsePacket.setVersion(loginRequestPacket.getVersion());
+        loginResponsePacket.setUserName(loginRequestPacket.getUsername());
         if (vaild(loginRequestPacket)) {
             loginResponsePacket.setSuccess(true);
-            LoginUtil.markAsLogin(ctx.channel());
-            LOGGER.info(new Date() + ": 登录成功");
+            String userId = randomUserId();
+            loginResponsePacket.setUserId(userId);
+            SessionUtil.bindSession(new Session(userId, loginRequestPacket.getUsername()), ctx.channel());
+            LOGGER.info("[" + loginRequestPacket.getUsername() + "]登录成功");
         } else {
             loginResponsePacket.setSuccess(false);
             loginResponsePacket.setReason("账号密码校验失败");
@@ -40,6 +45,24 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
     }
 
     private boolean vaild(LoginRequestPacket loginRequestPacket) {
-        return "jack".equals(loginRequestPacket.getUsername()) || "123456".equals(loginRequestPacket.getPassword());
+        return "123456".equals(loginRequestPacket.getPassword());
+    }
+
+    /**
+     * @return 随机用户Id
+     */
+    private static String randomUserId() {
+        return UUID.randomUUID().toString().split("-")[0];
+    }
+
+    /**
+     * 用户下线后，自动删除映射关系
+     *
+     * @param ctx
+     * @throws Exception
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        SessionUtil.unBindSession(ctx.channel());
     }
 }

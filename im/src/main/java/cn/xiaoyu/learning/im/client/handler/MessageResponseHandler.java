@@ -6,8 +6,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.Date;
-
 /**
  * @author roin.zhang
  * @date 2019/10/23
@@ -18,6 +16,8 @@ public class MessageResponseHandler extends SimpleChannelInboundHandler<MessageR
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageResponsePacket messageResponsePacket) throws Exception {
-        LOGGER.info(new Date() + ": 收到服务端的消息：" + messageResponsePacket.getMessage());
+        String fromUserId = messageResponsePacket.getFromUserId();
+        String fromUserName = messageResponsePacket.getFromUserName();
+        LOGGER.info(fromUserId + ":" + fromUserName + " -> " + messageResponsePacket.getMessage());
     }
 }
