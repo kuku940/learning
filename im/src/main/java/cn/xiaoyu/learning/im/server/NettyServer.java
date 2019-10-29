@@ -2,7 +2,9 @@ package cn.xiaoyu.learning.im.server;
 
 import cn.xiaoyu.learning.im.codec.PacketCodecHandler;
 import cn.xiaoyu.learning.im.codec.Spliter;
-import cn.xiaoyu.learning.im.server.handler.*;
+import cn.xiaoyu.learning.im.server.handler.AuthHandler;
+import cn.xiaoyu.learning.im.server.handler.IMHandler;
+import cn.xiaoyu.learning.im.server.handler.LoginRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -52,13 +54,7 @@ public class NettyServer {
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
                         // 新增用户认证handler
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
-                        ch.pipeline().addLast(MessageRequestHandler.INSTANCE);
-                        ch.pipeline().addLast(CreateGroupRequestHandler.INSTANCE);
-                        ch.pipeline().addLast(JoinGroupRequestHandler.INSTANCE);
-                        ch.pipeline().addLast(QuitGroupRequestHandler.INSTANCE);
-                        ch.pipeline().addLast(GroupMessageRequestHandler.INSTANCE);
-                        ch.pipeline().addLast(ListGroupMembersRequestHandler.INSTANCE);
-                        ch.pipeline().addLast(LogoutRequestHandler.INSTANCE);
+                        ch.pipeline().addLast(IMHandler.INSTANCE);
                     }
                 })
                 // 设置TCP底层相关属性
