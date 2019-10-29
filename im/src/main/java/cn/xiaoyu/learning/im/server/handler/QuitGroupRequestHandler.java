@@ -1,5 +1,7 @@
 package cn.xiaoyu.learning.im.server.handler;
 
+import cn.xiaoyu.learning.im.common.Session;
+import cn.xiaoyu.learning.im.protocol.request.QuitGroupRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.QuitGroupResponsePacket;
 import cn.xiaoyu.learning.im.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,11 +14,14 @@ import org.apache.commons.logging.LogFactory;
  * @author roin.zhang
  * @date 2019/10/24
  */
-public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGroupResponsePacket> {
+public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGroupRequestPacket> {
     private static final Log LOGGER = LogFactory.getLog(QuitGroupRequestHandler.class);
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, QuitGroupResponsePacket msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, QuitGroupRequestPacket msg) throws Exception {
+        Session session = SessionUtil.getSession(ctx.channel());
+        LOGGER.info(session.getUserId() + "退出群聊：" + msg.getGroupId());
+
         // 1. 获取群对应的 channelGroup，然后将当前用户的 channel 移除
         String groupId = msg.getGroupId();
         ChannelGroup channelGroup = SessionUtil.getChannelGroup(groupId);
