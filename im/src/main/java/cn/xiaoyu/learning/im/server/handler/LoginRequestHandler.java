@@ -5,6 +5,7 @@ import cn.xiaoyu.learning.im.protocol.request.LoginRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.LoginResponsePacket;
 import cn.xiaoyu.learning.im.util.IdGenerateUtil;
 import cn.xiaoyu.learning.im.util.SessionUtil;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.commons.logging.Log;
@@ -18,8 +19,11 @@ import java.util.Date;
  * @author roin.zhang
  * @date 2019/10/23
  */
+@ChannelHandler.Sharable
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
     private static final Log LOGGER = LogFactory.getLog(LoginRequestHandler.class);
+
+    public static final LoginRequestHandler INSTANCE = new LoginRequestHandler();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) {

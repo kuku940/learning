@@ -1,6 +1,7 @@
 package cn.xiaoyu.learning.im.server.handler;
 
 import cn.xiaoyu.learning.im.util.SessionUtil;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.commons.logging.Log;
@@ -12,8 +13,11 @@ import org.apache.commons.logging.LogFactory;
  * @author roin.zhang
  * @date 2019/10/23
  */
+@ChannelHandler.Sharable
 public class AuthHandler extends ChannelInboundHandlerAdapter {
     private static final Log LOGGER = LogFactory.getLog(AuthHandler.class);
+
+    public static final AuthHandler INSTANCE = new AuthHandler();
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

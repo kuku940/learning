@@ -5,6 +5,7 @@ import cn.xiaoyu.learning.im.protocol.request.ListGroupMembersRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.ListGroupMembersResponsePacket;
 import cn.xiaoyu.learning.im.util.SessionUtil;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
@@ -18,8 +19,11 @@ import java.util.List;
  * @author roin.zhang
  * @date 2019/10/24
  */
+@ChannelHandler.Sharable
 public class ListGroupMembersRequestHandler extends SimpleChannelInboundHandler<ListGroupMembersRequestPacket> {
     private static final Log LOGGER = LogFactory.getLog(ListGroupMembersRequestHandler.class);
+
+    public static final ListGroupMembersRequestHandler INSTANCE = new ListGroupMembersRequestHandler();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ListGroupMembersRequestPacket msg) throws Exception {

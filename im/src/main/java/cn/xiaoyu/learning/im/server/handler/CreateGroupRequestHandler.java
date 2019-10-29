@@ -5,6 +5,7 @@ import cn.xiaoyu.learning.im.protocol.response.CreateGroupResponsePacket;
 import cn.xiaoyu.learning.im.util.IdGenerateUtil;
 import cn.xiaoyu.learning.im.util.SessionUtil;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
@@ -19,8 +20,11 @@ import java.util.List;
  * @author roin.zhang
  * @date 2019/10/24
  */
+@ChannelHandler.Sharable
 public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<CreateGroupRequestPacket> {
     private static final Log LOGGER = LogFactory.getLog(CreateGroupRequestHandler.class);
+
+    public static final CreateGroupRequestHandler INSTANCE = new CreateGroupRequestHandler();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, CreateGroupRequestPacket createGroupRequestPacket) throws Exception {

@@ -5,6 +5,7 @@ import cn.xiaoyu.learning.im.protocol.request.MessageRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.MessageResponsePacket;
 import cn.xiaoyu.learning.im.util.SessionUtil;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.commons.logging.Log;
@@ -18,8 +19,11 @@ import java.util.Date;
  * @author roin.zhang
  * @date 2019/10/23
  */
+@ChannelHandler.Sharable
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
     private static final Log LOGGER = LogFactory.getLog(MessageRequestHandler.class);
+
+    public static final MessageRequestHandler INSTANCE = new MessageRequestHandler();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket messageRequestPacket) throws Exception {

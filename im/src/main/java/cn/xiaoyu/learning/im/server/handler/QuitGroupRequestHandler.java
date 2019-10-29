@@ -4,6 +4,7 @@ import cn.xiaoyu.learning.im.common.Session;
 import cn.xiaoyu.learning.im.protocol.request.QuitGroupRequestPacket;
 import cn.xiaoyu.learning.im.protocol.response.QuitGroupResponsePacket;
 import cn.xiaoyu.learning.im.util.SessionUtil;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
@@ -14,8 +15,11 @@ import org.apache.commons.logging.LogFactory;
  * @author roin.zhang
  * @date 2019/10/24
  */
+@ChannelHandler.Sharable
 public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGroupRequestPacket> {
     private static final Log LOGGER = LogFactory.getLog(QuitGroupRequestHandler.class);
+
+    public static final QuitGroupRequestHandler INSTANCE = new QuitGroupRequestHandler();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, QuitGroupRequestPacket msg) throws Exception {
