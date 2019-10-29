@@ -14,4 +14,21 @@
 7. `channelUNregistered`连接关闭，与此连接绑定的线程移除对连接的处理；
 8. `handlerRemoved`连接关闭，添加到连接上的所有业务逻辑处理器都给移除掉。
 
+### 减少主线程阻塞的操作并记录耗时
+
+如果在channelRead0()中进行耗时操作，会拖慢在该NIO线程上的其他所有的channel，
+所以耗时操作需要放置到业务线程池中处理，伪代码如下：
+
+    protected void channelRead0(ChannelHandlerContext ctx, T packet) {
+        threadPool.submit(new Runnable() {
+            long begin = System.currentTimeMills();
+            
+            // 数据库或网络等其他耗时操作
+            // writeAndFlush()
+            ctx.channel().writeAndFlush().addListener(future -> {
+                long time = System.currentTimeMills() - begin;
+            });
+        }) 
+    }
+
 
