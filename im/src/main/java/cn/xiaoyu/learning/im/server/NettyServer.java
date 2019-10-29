@@ -1,7 +1,6 @@
 package cn.xiaoyu.learning.im.server;
 
-import cn.xiaoyu.learning.im.codec.PacketDecoder;
-import cn.xiaoyu.learning.im.codec.PacketEncoder;
+import cn.xiaoyu.learning.im.codec.PacketCodecHandler;
 import cn.xiaoyu.learning.im.codec.Spliter;
 import cn.xiaoyu.learning.im.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
@@ -49,7 +48,7 @@ public class NettyServer {
                         LOGGER.info(AttributeKey.valueOf("childName") + "处理器处理中");
                         // 自定义拆包处理器 + 是否支持自定义协议的客户端
                         ch.pipeline().addLast(new Spliter());
-                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
                         // 新增用户认证handler
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
@@ -60,7 +59,6 @@ public class NettyServer {
                         ch.pipeline().addLast(GroupMessageRequestHandler.INSTANCE);
                         ch.pipeline().addLast(ListGroupMembersRequestHandler.INSTANCE);
                         ch.pipeline().addLast(LogoutRequestHandler.INSTANCE);
-                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 })
                 // 设置TCP底层相关属性
