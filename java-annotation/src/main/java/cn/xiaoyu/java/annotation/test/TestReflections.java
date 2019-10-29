@@ -16,8 +16,10 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * @link https://www.programcreek.com/java-api-examples/index.php?api=org.reflections.scanners.MethodAnnotationsScanner
  * 使用Reflections来反射获取类
+ *
+ * @author roin.zhang
+ * @link {https://www.programcreek.com/java-api-examples/index.php?api=org.reflections.scanners.MethodAnnotationsScanner}
  */
 public class TestReflections {
     private static final String DOT = ".";
@@ -55,6 +57,7 @@ public class TestReflections {
 
     /**
      * 获取指定包下被Person注释修饰的方法
+     *
      * @param pack
      * @return
      */
