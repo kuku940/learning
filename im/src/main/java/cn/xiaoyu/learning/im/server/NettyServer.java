@@ -2,7 +2,9 @@ package cn.xiaoyu.learning.im.server;
 
 import cn.xiaoyu.learning.im.codec.PacketCodecHandler;
 import cn.xiaoyu.learning.im.codec.Spliter;
+import cn.xiaoyu.learning.im.handler.IMIdleStateHandler;
 import cn.xiaoyu.learning.im.server.handler.AuthHandler;
+import cn.xiaoyu.learning.im.server.handler.HeartBeatRequestHandler;
 import cn.xiaoyu.learning.im.server.handler.IMHandler;
 import cn.xiaoyu.learning.im.server.handler.LoginRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
@@ -48,10 +50,13 @@ public class NettyServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         LOGGER.info(AttributeKey.valueOf("childName") + "处理器处理中");
+                        // 空闲检测
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         // 自定义拆包处理器 + 是否支持自定义协议的客户端
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
+                        ch.pipeline().addLast(HeartBeatRequestHandler.INSTANCE);
                         // 新增用户认证handler
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
                         ch.pipeline().addLast(IMHandler.INSTANCE);

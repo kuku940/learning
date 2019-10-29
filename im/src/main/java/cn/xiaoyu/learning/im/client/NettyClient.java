@@ -55,6 +55,9 @@ public class NettyClient {
                         ch.pipeline().addLast(new ListGroupMembersResponseHandler());
                         ch.pipeline().addLast(new LogoutResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
+
+                        // 心跳定时器
+                        ch.pipeline().addLast(new HeartBeatTimeHandler());
                     }
                 })
                 // 设置TCP底层相关属性
