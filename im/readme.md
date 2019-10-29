@@ -31,4 +31,34 @@
         }) 
     }
 
+### 工程结构介绍
 
+    cn.xiaoyu.learning.im  
+    +--client  
+    |  \-console 控制台命令      
+    |  \-handler 客户端处理器  
+    |  \-NettyClient Netty客户端启动程序  
+    +--codec 编解码器及拆包器  
+    +--common 常量  
+    +--handler   
+    |  \-IMIdleStateHandler 空闲检测处理器  
+    +--protocol  
+    |  \-command 指令类型  
+    |  \-request request请求契约  
+    |  \-response response响应契约
+    |  \-Packet 契约父类
+    |  \-PacketCodeC 序列化和反序列化工具类
+    +--serialize
+    |  \-impl 序列化实现子类
+    |  \-Serializer 序列化实现接口
+    |  \-SerializerAlgorithm 序列化实现算法
+    +--server
+    |  \-handler 服务端处理器
+    |  \-NettyServver Netty服务端启动程序
+    +--util 工具类
+  
+### 启动过程
+
+1. 运行NettyServer服务端；
+2. 运行NettyClient客户端；
+3. 输入姓名登录，进行其他操作。
