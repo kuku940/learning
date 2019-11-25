@@ -18,6 +18,21 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     private int counter = 0;
 
     @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("ChannelActive");
+    }
+
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("ChannelRegistered");
+    }
+
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("HandlerAdded");
+    }
+
+    @Override
     /**
      * 表明一个ChannelHandler可以被多个Channel安全地共享
      * 每次接收消息时被调用
