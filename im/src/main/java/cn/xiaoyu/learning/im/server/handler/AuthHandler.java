@@ -15,9 +15,8 @@ import org.apache.commons.logging.LogFactory;
  */
 @ChannelHandler.Sharable
 public class AuthHandler extends ChannelInboundHandlerAdapter {
-    private static final Log LOGGER = LogFactory.getLog(AuthHandler.class);
-
     public static final AuthHandler INSTANCE = new AuthHandler();
+    private static final Log LOGGER = LogFactory.getLog(AuthHandler.class);
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

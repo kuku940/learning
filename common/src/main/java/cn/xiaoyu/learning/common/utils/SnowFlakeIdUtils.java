@@ -103,6 +103,18 @@ public class SnowFlakeIdUtils {
     }
 
     /**
+     * 测试
+     */
+    public static void main(String[] args) {
+        SnowFlakeIdUtils idWorker = new SnowFlakeIdUtils(0, 0);
+        for (int i = 0; i < 1000; i++) {
+            long id = idWorker.nextId();
+            System.out.println(Long.toBinaryString(id));
+            System.out.println(id);
+        }
+    }
+
+    /**
      * 获得下一个ID (该方法是线程安全的)
      *
      * @return SnowflakeId
@@ -165,17 +177,5 @@ public class SnowFlakeIdUtils {
      */
     protected long timeGen() {
         return System.currentTimeMillis();
-    }
-
-    /**
-     * 测试
-     */
-    public static void main(String[] args) {
-        SnowFlakeIdUtils idWorker = new SnowFlakeIdUtils(0, 0);
-        for (int i = 0; i < 1000; i++) {
-            long id = idWorker.nextId();
-            System.out.println(Long.toBinaryString(id));
-            System.out.println(id);
-        }
     }
 }

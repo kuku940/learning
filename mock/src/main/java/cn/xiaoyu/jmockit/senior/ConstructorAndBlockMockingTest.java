@@ -13,6 +13,17 @@ import org.junit.Test;
  */
 
 public class ConstructorAndBlockMockingTest {
+    @Test
+    public void testClassMockingByMockUp() {
+        new AnOrdinaryWithBlockMockUp();
+        AnOrdinaryClassWithBlock instance = new AnOrdinaryClassWithBlock(10);
+
+        // 静态初始代码块mock
+        Assert.assertEquals(0, AnOrdinaryClassWithBlock.j);
+        // 构造函数和初始代码块被mock
+        Assert.assertEquals(0, instance.getI());
+    }
+
     public static class AnOrdinaryWithBlockMockUp extends MockUp<AnOrdinaryClassWithBlock> {
         @Mock
         public void $init(int i) { // Mock构造函数和初始代码块，函数名$init就代表类的构造函数
@@ -25,32 +36,21 @@ public class ConstructorAndBlockMockingTest {
         }
     }
 
-    @Test
-    public void testClassMockingByMockUp() {
-        new AnOrdinaryWithBlockMockUp();
-        AnOrdinaryClassWithBlock instance = new AnOrdinaryClassWithBlock(10);
-
-        // 静态初始代码块mock
-        Assert.assertEquals(0, AnOrdinaryClassWithBlock.j);
-        // 构造函数和初始代码块被mock
-        Assert.assertEquals(0, instance.getI());
-    }
-
 }
 
 class AnOrdinaryClassWithBlock {
-    private int i;
-
     public static int j;
-
-    // 初始代码块
-    {
-        i = 1;
-    }
 
     // 静态初始代码块
     static {
         j = 2;
+    }
+
+    private int i;
+
+    // 初始代码块
+    {
+        i = 1;
     }
 
     // 构造函数

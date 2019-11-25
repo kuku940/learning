@@ -8,17 +8,17 @@ import org.apache.rocketmq.common.message.Message;
  * 指定的时间后执行
  */
 public class ScheduledProducer {
-  public static void main(String[] args) throws Exception {
-    DefaultMQProducer producer = new DefaultMQProducer();
-    producer.start();
+    public static void main(String[] args) throws Exception {
+        DefaultMQProducer producer = new DefaultMQProducer();
+        producer.start();
 
-    int totalMsg2Send = 10;
-    for (int i = 0; i < totalMsg2Send; i++) {
-      Message msg = new Message("TestTopic", ("Hello Scheduled message " + i).getBytes());
-      msg.setDelayTimeLevel(3);
-      producer.send(msg);
+        int totalMsg2Send = 10;
+        for (int i = 0; i < totalMsg2Send; i++) {
+            Message msg = new Message("TestTopic", ("Hello Scheduled message " + i).getBytes());
+            msg.setDelayTimeLevel(3);
+            producer.send(msg);
+        }
+
+        producer.shutdown();
     }
-
-    producer.shutdown();
-  }
 }

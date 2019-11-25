@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 public class Work2 {
-    private static AtomicInteger flag = new AtomicInteger(0);
     private static final String TASK_QUEUE_NAME = "task_queue";
+    private static AtomicInteger flag = new AtomicInteger(0);
 
     public static void main(String[] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();

@@ -14,6 +14,14 @@ public class JsonDeserializer<T> implements Deserializer<T> {
     private Gson gson = new Gson();
     private Class<T> clazz;
 
+    public JsonDeserializer() {
+
+    }
+
+    public JsonDeserializer(Class clazz) {
+        this.clazz = clazz;
+    }
+
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
         if (clazz == null) {
@@ -32,13 +40,5 @@ public class JsonDeserializer<T> implements Deserializer<T> {
     @Override
     public void close() {
 
-    }
-
-    public JsonDeserializer() {
-
-    }
-
-    public JsonDeserializer(Class clazz) {
-        this.clazz = clazz;
     }
 }

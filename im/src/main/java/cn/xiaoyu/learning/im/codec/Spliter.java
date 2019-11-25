@@ -11,7 +11,7 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
  * 通讯协议格式：
  * 魔数0x12345678     版本号1        序列化算法       指令      数据长度        数据
  * 4字节              1字节         1字节            1字节      4字节         N字节
- *
+ * <p>
  * netty的再带拆包器：
  * 1. 固定长度的拆包器 - FixedLengthFrameDecoder
  * 2. 行拆包器 - LineBasedFrameDecoder

@@ -11,5 +11,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Person {
     String name() default "xiaoxiao";
+
     GenderEnum gender() default GenderEnum.Female;
 }

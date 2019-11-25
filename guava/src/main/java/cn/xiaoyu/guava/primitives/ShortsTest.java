@@ -18,14 +18,14 @@ public class ShortsTest {
         shortArrays = Shorts.toArray(objectArray);
         System.out.print("[");
         System.out.print("[ ");
-        for(int i = 0; i< shortArrays.length ; i++){
+        for (int i = 0; i < shortArrays.length; i++) {
             System.out.print(shortArrays[i] + " ");
         }
         System.out.println("]");
 
         short data = 5;
         //check if element is present in the list of primitives or not
-        System.out.println("5 is in list? "+ Shorts.contains(shortArrays, data));
+        System.out.println("5 is in list? " + Shorts.contains(shortArrays, data));
 
         //Returns the minimum
         System.out.println("Min: " + Shorts.min(shortArrays));
@@ -35,7 +35,7 @@ public class ShortsTest {
         data = 2400;
         //get the byte array from an integer
         byte[] byteArray = Shorts.toByteArray(data);
-        for(int i = 0; i< byteArray.length ; i++){
+        for (int i = 0; i < byteArray.length; i++) {
             System.out.print(byteArray[i] + " ");
         }
     }

@@ -21,9 +21,8 @@ import java.util.Date;
  */
 @ChannelHandler.Sharable
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
-    private static final Log LOGGER = LogFactory.getLog(MessageRequestHandler.class);
-
     public static final MessageRequestHandler INSTANCE = new MessageRequestHandler();
+    private static final Log LOGGER = LogFactory.getLog(MessageRequestHandler.class);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket messageRequestPacket) throws Exception {

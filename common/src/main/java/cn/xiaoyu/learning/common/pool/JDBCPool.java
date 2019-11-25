@@ -24,18 +24,6 @@ public class JDBCPool {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
     private volatile static JDBCPool pool;
-
-    public static JDBCPool getInstance() {
-        if (pool == null) {
-            synchronized (JDBCPool.class) {
-                if (pool == null) {
-                    pool = new JDBCPool();
-                }
-            }
-        }
-        return pool;
-    }
-
     private static GenericObjectPool<Connection> connPool;
 
     private JDBCPool() {
@@ -50,21 +38,15 @@ public class JDBCPool {
                 config);
     }
 
-    private GenericObjectPoolConfig getDefaultConfig() {
-        GenericObjectPoolConfig config = new GenericObjectPoolConfig();
-        config.setMaxTotal(50);
-        config.setMaxIdle(50);
-        config.setMinIdle(0);
-        config.setMaxWaitMillis(60000);
-        return config;
-    }
-
-    public GenericObjectPool<Connection> getConnectionPool() {
-        return connPool;
-    }
-
-    public Connection getConnection() throws Exception {
-        return getConnectionPool().borrowObject();
+    public static JDBCPool getInstance() {
+        if (pool == null) {
+            synchronized (JDBCPool.class) {
+                if (pool == null) {
+                    pool = new JDBCPool();
+                }
+            }
+        }
+        return pool;
     }
 
     public static void closePsAndRs(PreparedStatement ps, ResultSet rs) {
@@ -93,6 +75,33 @@ public class JDBCPool {
         returnConnection(conn);
     }
 
+    public static void main(String[] args) {
+        try {
+            for (int i = 0; i < 200; i++) {
+                new Thread(new PoolTestThread()).start();
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+    private GenericObjectPoolConfig getDefaultConfig() {
+        GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+        config.setMaxTotal(50);
+        config.setMaxIdle(50);
+        config.setMinIdle(0);
+        config.setMaxWaitMillis(60000);
+        return config;
+    }
+
+    public GenericObjectPool<Connection> getConnectionPool() {
+        return connPool;
+    }
+
+    public Connection getConnection() throws Exception {
+        return getConnectionPool().borrowObject();
+    }
+
     static class JDBCPooledFactory extends BasePooledObjectFactory<Connection> {
         static {
             try {
@@ -110,16 +119,6 @@ public class JDBCPool {
         @Override
         public PooledObject<Connection> wrap(Connection connection) {
             return new DefaultPooledObject<>(connection);
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            for (int i = 0; i < 200; i++) {
-                new Thread(new PoolTestThread()).start();
-            }
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
         }
     }
 

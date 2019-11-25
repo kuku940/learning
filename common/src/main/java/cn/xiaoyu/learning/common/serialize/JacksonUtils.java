@@ -15,9 +15,7 @@ import java.text.SimpleDateFormat;
  */
 public final class JacksonUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JacksonUtils.class);
-
-    private JacksonUtils() {
-    }
+    private static ObjectMapper jackson;
 
     static {
         jackson = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL)
@@ -25,7 +23,8 @@ public final class JacksonUtils {
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    private static ObjectMapper jackson;
+    private JacksonUtils() {
+    }
 
     /**
      * Json To Object

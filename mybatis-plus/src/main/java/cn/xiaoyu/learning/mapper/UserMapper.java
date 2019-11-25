@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
- *  Mapper 接口
+ * Mapper 接口
  *
  * @author Roin
  * @since 2019-07-17

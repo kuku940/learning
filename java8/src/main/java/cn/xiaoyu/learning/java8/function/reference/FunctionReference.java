@@ -3,6 +3,11 @@ package cn.xiaoyu.learning.java8.function.reference;
 import java.util.Arrays;
 import java.util.List;
 
+@FunctionalInterface
+interface Supplier<T> {
+    T get();
+}
+
 /**
  * 方法引用
  * <p>
@@ -28,11 +33,6 @@ public class FunctionReference {
         List<String> names = Arrays.asList("google", "facebook", "microsoft", "amazon");
         names.forEach(System.out::println);
     }
-}
-
-@FunctionalInterface
-interface Supplier<T> {
-    T get();
 }
 
 class Car {

@@ -15,9 +15,8 @@ import org.apache.commons.logging.LogFactory;
  */
 @ChannelHandler.Sharable
 public class LogoutRequestHandler extends SimpleChannelInboundHandler<LogoutRequestPacket> {
-    private static final Log LOGGER = LogFactory.getLog(CreateGroupRequestHandler.class);
-
     public static final LoginRequestHandler INSTANCE = new LoginRequestHandler();
+    private static final Log LOGGER = LogFactory.getLog(CreateGroupRequestHandler.class);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LogoutRequestPacket msg) throws Exception {

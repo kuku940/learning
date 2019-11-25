@@ -17,9 +17,8 @@ import org.apache.commons.logging.LogFactory;
  */
 @ChannelHandler.Sharable
 public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGroupRequestPacket> {
-    private static final Log LOGGER = LogFactory.getLog(QuitGroupRequestHandler.class);
-
     public static final QuitGroupRequestHandler INSTANCE = new QuitGroupRequestHandler();
+    private static final Log LOGGER = LogFactory.getLog(QuitGroupRequestHandler.class);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, QuitGroupRequestPacket msg) throws Exception {

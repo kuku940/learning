@@ -14,6 +14,14 @@ import java.util.Scanner;
 public class LoginConsoleCommand implements ConsoleCommand {
     private static final Log LOGGER = LogFactory.getLog(LoginConsoleCommand.class);
 
+    private static void waitForLoginResponse() {
+        try {
+            Thread.sleep(1000);
+        } catch (Exception ex) {
+            LOGGER.error(ex);
+        }
+    }
+
     @Override
     public void exec(Scanner scanner, Channel channel) {
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
@@ -25,13 +33,5 @@ public class LoginConsoleCommand implements ConsoleCommand {
         // 发送数据包
         channel.writeAndFlush(loginRequestPacket);
         waitForLoginResponse();
-    }
-
-    private static void waitForLoginResponse() {
-        try {
-            Thread.sleep(1000);
-        } catch (Exception ex) {
-            LOGGER.error(ex);
-        }
     }
 }

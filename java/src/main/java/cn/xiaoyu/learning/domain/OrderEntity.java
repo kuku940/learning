@@ -7,7 +7,7 @@ import lombok.Data;
  * @date 2019-08-27
  */
 @Data
-public class OrderEntity extends BaseEntity{
+public class OrderEntity extends BaseEntity {
     private Long orderId;
     private String source;
 }

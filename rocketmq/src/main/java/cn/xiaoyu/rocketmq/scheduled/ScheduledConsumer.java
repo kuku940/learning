@@ -10,14 +10,14 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
  */
 public class ScheduledConsumer {
 
-  public static void main(String[] args) throws Exception {
-    DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
-    consumer.subscribe("TestTopic", "*");
+    public static void main(String[] args) throws Exception {
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
+        consumer.subscribe("TestTopic", "*");
 
-    consumer.registerMessageListener((MessageListenerConcurrently) (msgs, ctx) -> {
-      msgs.forEach(msg -> System.out.println("Receive message[msgId=" + msg.getMsgId() + "]"
-          + (System.currentTimeMillis() - msg.getStoreTimestamp()) + "ms later"));
-      return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-    });
-  }
+        consumer.registerMessageListener((MessageListenerConcurrently) (msgs, ctx) -> {
+            msgs.forEach(msg -> System.out.println("Receive message[msgId=" + msg.getMsgId() + "]"
+                    + (System.currentTimeMillis() - msg.getStoreTimestamp()) + "ms later"));
+            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+        });
+    }
 }

@@ -1,4 +1,3 @@
-
 package cn.xiaoyu.learning.cxfservice.wsinterface.calculator;
 
 import javax.xml.bind.JAXBElement;
@@ -8,18 +7,17 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the cn.xiaoyu.learning.cxfservice.wsinterface.calculator package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the cn.xiaoyu.learning.cxfservice.wsinterface.calculator package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -31,14 +29,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cn.xiaoyu.learning.cxfservice.wsinterface.calculator
-     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link Add }
-     * 
      */
     public Add createAdd() {
         return new Add();
@@ -46,7 +42,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Sub }
-     * 
      */
     public Sub createSub() {
         return new Sub();
@@ -54,7 +49,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SubResponse }
-     * 
      */
     public SubResponse createSubResponse() {
         return new SubResponse();
@@ -62,7 +56,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddResponse }
-     * 
      */
     public AddResponse createAddResponse() {
         return new AddResponse();
@@ -70,7 +63,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AddResponse }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://service.cxfservice.learning.xiaoyu.cn/", name = "addResponse")
     public JAXBElement<AddResponse> createAddResponse(AddResponse value) {
@@ -79,7 +71,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Sub }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://service.cxfservice.learning.xiaoyu.cn/", name = "sub")
     public JAXBElement<Sub> createSub(Sub value) {
@@ -88,7 +79,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SubResponse }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://service.cxfservice.learning.xiaoyu.cn/", name = "subResponse")
     public JAXBElement<SubResponse> createSubResponse(SubResponse value) {
@@ -97,7 +87,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Add }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://service.cxfservice.learning.xiaoyu.cn/", name = "add")
     public JAXBElement<Add> createAdd(Add value) {

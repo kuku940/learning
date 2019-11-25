@@ -1,4 +1,3 @@
-
 package cn.xiaoyu.learning.cxfservice.wsinterface.userservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,10 +7,10 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>getUserByIdResponse complex type的 Java 类。
- * 
- * <p>以下模式片段指定包含在此类中的预期内容。
- * 
+ * <p>getUserByIdResponse complex type锟斤拷 Java 锟洁。
+ *
+ * <p>锟斤拷锟斤拷模式片锟斤拷指锟斤拷锟斤拷锟斤拷锟节达拷锟斤拷锟叫碉拷预锟斤拷锟斤拷锟捷★拷
+ *
  * <pre>
  * &lt;complexType name="getUserByIdResponse">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getUserByIdResponse", propOrder = {
-    "_return"
+        "_return"
 })
 public class GetUserByIdResponse {
 
@@ -36,24 +33,20 @@ public class GetUserByIdResponse {
     protected User _return;
 
     /**
-     * 获取return属性的值。
-     * 
-     * @return
-     *     possible object is
-     *     {@link User }
-     *     
+     * 锟斤拷取return锟斤拷锟皆碉拷值锟斤拷
+     *
+     * @return possible object is
+     * {@link User }
      */
     public User getReturn() {
         return _return;
     }
 
     /**
-     * 设置return属性的值。
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link User }
-     *     
+     * 锟斤拷锟斤拷return锟斤拷锟皆碉拷值锟斤拷
+     *
+     * @param value allowed object is
+     *              {@link User }
      */
     public void setReturn(User value) {
         this._return = value;

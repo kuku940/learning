@@ -1,6 +1,9 @@
 package cn.xiaoyu.learning.kafka;
 
-import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -11,6 +14,12 @@ public class CommonConsumer extends Thread {
     private String[] subject;
     private ConsumerListener listener;
     private KafkaConsumer<String, String> consumer;
+
+    public CommonConsumer(String groupId, String[] subject, ConsumerListener listener) {
+        this.groupId = groupId;
+        this.subject = subject;
+        this.listener = listener;
+    }
 
     /**
      * 初始化kafka消费者
@@ -49,11 +58,5 @@ public class CommonConsumer extends Thread {
     public void run() {
         init();
         consume();
-    }
-
-    public CommonConsumer(String groupId, String[] subject, ConsumerListener listener) {
-        this.groupId = groupId;
-        this.subject = subject;
-        this.listener = listener;
     }
 }

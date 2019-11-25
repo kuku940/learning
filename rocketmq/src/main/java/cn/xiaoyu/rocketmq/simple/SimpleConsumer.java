@@ -9,21 +9,21 @@ import org.apache.rocketmq.client.exception.MQClientException;
  * 简单消息示例 - 消费者
  */
 public class SimpleConsumer {
-  public static void main(String[] args) throws MQClientException {
-    DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("mq-group");
+    public static void main(String[] args) throws MQClientException {
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("mq-group");
 
-    consumer.setNamesrvAddr("127.0.0.1：9876");
-    consumer.setInstanceName("consumer");
-    consumer.subscribe("TopicTest", "*");
+        consumer.setNamesrvAddr("127.0.0.1：9876");
+        consumer.setInstanceName("consumer");
+        consumer.subscribe("TopicTest", "*");
 
-    consumer.registerMessageListener(
-        (MessageListenerConcurrently) (msgs, context) -> {
-          msgs.forEach(msg -> System.out.println(new String(msg.getBody())));
+        consumer.registerMessageListener(
+                (MessageListenerConcurrently) (msgs, context) -> {
+                    msgs.forEach(msg -> System.out.println(new String(msg.getBody())));
 
-          return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-        });
+                    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                });
 
-    consumer.start();
-    System.out.println("Consumer Started...");
-  }
+        consumer.start();
+        System.out.println("Consumer Started...");
+    }
 }

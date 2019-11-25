@@ -11,25 +11,25 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  */
 public class OrderedProducer {
 
-  public static void main(String[] args) throws Exception {
-    MQProducer producer = new DefaultMQProducer("OrderedGroup");
-    producer.start();
+    public static void main(String[] args) throws Exception {
+        MQProducer producer = new DefaultMQProducer("OrderedGroup");
+        producer.start();
 
-    String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
+        String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
 
-    for (int i = 0; i < 10; i++) {
-      int orderId = i % 10;
-      Message msg = new Message("TopicTestOrdered", tags[i % tags.length], "Key" + i,
-          ("Hello RocketMQ" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
-      SendResult result = producer.send(msg, (mqs, msg1, obj) -> {
-        Integer id = (Integer) obj;
-        int index = id % mqs.size();
-        return mqs.get(index);
-      }, orderId);
+        for (int i = 0; i < 10; i++) {
+            int orderId = i % 10;
+            Message msg = new Message("TopicTestOrdered", tags[i % tags.length], "Key" + i,
+                    ("Hello RocketMQ" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
+            SendResult result = producer.send(msg, (mqs, msg1, obj) -> {
+                Integer id = (Integer) obj;
+                int index = id % mqs.size();
+                return mqs.get(index);
+            }, orderId);
 
-      System.out.printf("%s%n", result);
+            System.out.printf("%s%n", result);
 
-      producer.shutdown();
+            producer.shutdown();
+        }
     }
-  }
 }

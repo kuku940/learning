@@ -1,19 +1,18 @@
-
 package cn.xiaoyu.learning.cxfservice.wsinterface.userservice;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * <p>user complex typeµÄ Java Àà¡£
- * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖÐµÄÔ¤ÆÚÄÚÈÝ¡£
- * 
+ * <p>user complex typeï¿½ï¿½ Java ï¿½à¡£
+ *
+ * <p>ï¿½ï¿½ï¿½ï¿½Ä£Ê½Æ¬ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+ *
  * <pre>
  * &lt;complexType name="user">
  *   &lt;complexContent>
@@ -28,15 +27,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "user", propOrder = {
-    "age",
-    "habby",
-    "id",
-    "username"
+        "age",
+        "habby",
+        "id",
+        "username"
 })
 public class User {
 
@@ -47,16 +44,14 @@ public class User {
     protected String username;
 
     /**
-     * »ñÈ¡ageÊôÐÔµÄÖµ¡£
-     * 
+     * ï¿½ï¿½È¡ageï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
      */
     public int getAge() {
         return age;
     }
 
     /**
-     * ÉèÖÃageÊôÐÔµÄÖµ¡£
-     * 
+     * ï¿½ï¿½ï¿½ï¿½ageï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
      */
     public void setAge(int value) {
         this.age = value;
@@ -64,25 +59,23 @@ public class User {
 
     /**
      * Gets the value of the habby property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the habby property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getHabby().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
      */
     public List<String> getHabby() {
         if (habby == null) {
@@ -92,40 +85,34 @@ public class User {
     }
 
     /**
-     * »ñÈ¡idÊôÐÔµÄÖµ¡£
-     * 
+     * ï¿½ï¿½È¡idï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
      */
     public long getId() {
         return id;
     }
 
     /**
-     * ÉèÖÃidÊôÐÔµÄÖµ¡£
-     * 
+     * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
      */
     public void setId(long value) {
         this.id = value;
     }
 
     /**
-     * »ñÈ¡usernameÊôÐÔµÄÖµ¡£
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * ï¿½ï¿½È¡usernameï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * ÉèÖÃusernameÊôÐÔµÄÖµ¡£
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * ï¿½ï¿½ï¿½ï¿½usernameï¿½ï¿½ï¿½Ôµï¿½Öµï¿½ï¿½
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUsername(String value) {
         this.username = value;

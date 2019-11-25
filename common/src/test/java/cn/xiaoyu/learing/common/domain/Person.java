@@ -5,15 +5,15 @@ package cn.xiaoyu.learing.common.domain;
  * @date 2019-08-19
  */
 public class Person {
-    public Person(){}
+    private String name;
+    private int age;
 
+    public Person() {
+    }
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
-
-    private String name;
-    private int age;
 
     public String getName() {
         return name;

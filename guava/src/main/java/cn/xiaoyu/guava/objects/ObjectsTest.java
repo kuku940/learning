@@ -21,6 +21,13 @@ class Student {
     private int rollNo;
     private String className;
 
+    public Student(String firstName, String lastName, int rollNo, String className) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.rollNo = rollNo;
+        this.className = className;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -40,13 +47,6 @@ class Student {
     public int hashCode() {
         // 生成多个值的哈希码
         return Objects.hashCode(className, rollNo);
-    }
-
-    public Student(String firstName, String lastName, int rollNo, String className) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.rollNo = rollNo;
-        this.className = className;
     }
 
     public String getFirstName() {

@@ -43,10 +43,11 @@ public class PurchasePattern {
         return new Builder();
     }
 
-    public static Builder builder(Purchase purchase){
+    public static Builder builder(Purchase purchase) {
         return new Builder(purchase);
 
     }
+
     public String getZipCode() {
         return zipCode;
     }
@@ -102,7 +103,7 @@ public class PurchasePattern {
         private Date date;
         private double amount;
 
-        private  Builder() {
+        private Builder() {
         }
 
         private Builder(Purchase purchase) {

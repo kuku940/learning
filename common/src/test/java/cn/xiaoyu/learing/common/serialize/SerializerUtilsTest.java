@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public class SerializerUtilsTest {
     @Test
-    public void testFastjson(){
+    public void testFastjson() {
         Person person = new Person("Jack", 18);
         String json = SerializerUtils.FASTJSON.serialize(person, "UTF-8");
         System.out.println(json);
@@ -20,7 +20,7 @@ public class SerializerUtilsTest {
     }
 
     @Test
-    public void testJackson(){
+    public void testJackson() {
         Person person = new Person("Pony", 20);
         String json = SerializerUtils.JACKSON.serialize(person, "UTF-8");
         System.out.println(json);

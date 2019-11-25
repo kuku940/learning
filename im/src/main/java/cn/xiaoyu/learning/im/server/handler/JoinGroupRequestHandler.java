@@ -16,9 +16,8 @@ import org.apache.commons.logging.LogFactory;
  */
 @ChannelHandler.Sharable
 public class JoinGroupRequestHandler extends SimpleChannelInboundHandler<JoinGroupRequestPacket> {
-    private static final Log LOGGER = LogFactory.getLog(JoinGroupRequestHandler.class);
-
     public static final JoinGroupRequestHandler INSTANCE = new JoinGroupRequestHandler();
+    private static final Log LOGGER = LogFactory.getLog(JoinGroupRequestHandler.class);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, JoinGroupRequestPacket msg) throws Exception {

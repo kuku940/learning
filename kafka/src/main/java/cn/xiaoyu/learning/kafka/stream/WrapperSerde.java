@@ -10,6 +10,11 @@ public class WrapperSerde<T> implements Serde<T> {
     private final Serializer<T> serializer;
     private final Deserializer<T> deserializer;
 
+    WrapperSerde(Serializer<T> serializer, Deserializer<T> deserializer) {
+        this.serializer = serializer;
+        this.deserializer = deserializer;
+    }
+
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
         serializer.configure(configs, isKey);
@@ -30,10 +35,5 @@ public class WrapperSerde<T> implements Serde<T> {
     @Override
     public Deserializer<T> deserializer() {
         return deserializer;
-    }
-
-    WrapperSerde(Serializer<T> serializer, Deserializer<T> deserializer) {
-        this.serializer = serializer;
-        this.deserializer = deserializer;
     }
 }

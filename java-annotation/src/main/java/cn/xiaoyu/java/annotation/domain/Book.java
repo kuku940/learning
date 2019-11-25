@@ -10,7 +10,7 @@ public class Book {
     private Person person;
 
     @Person(name = "zhaoxiaoxiao")
-    public void setPerson(){
+    public void setPerson() {
         System.out.println("hello world!");
     }
 }

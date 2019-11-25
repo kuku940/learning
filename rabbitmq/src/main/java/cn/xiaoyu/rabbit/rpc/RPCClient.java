@@ -26,6 +26,32 @@ public class RPCClient {
         channel = connection.createChannel();
     }
 
+    public static void main(String[] args) {
+        RPCClient fibonacciRpc = null;
+        String response = null;
+
+        try {
+            fibonacciRpc = new RPCClient();
+
+            for (int i = 0; i < 32; i++) {
+                String i_str = Integer.toString(i);
+                System.out.println(" [x] Requesting fib(" + i_str + ")");
+                response = fibonacciRpc.call(i_str);
+                System.out.println(" [.] Got '" + response + "'");
+            }
+        } catch (IOException | TimeoutException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            if (fibonacciRpc != null) {
+                try {
+                    fibonacciRpc.close();
+                } catch (IOException _ignore) {
+
+                }
+            }
+        }
+    }
+
     public String call(String message) throws IOException, InterruptedException {
         final String corrId = UUID.randomUUID().toString();
 
@@ -55,31 +81,5 @@ public class RPCClient {
 
     public void close() throws IOException {
         connection.close();
-    }
-
-    public static void main(String[] args) {
-        RPCClient fibonacciRpc = null;
-        String response = null;
-
-        try {
-            fibonacciRpc = new RPCClient();
-
-            for (int i = 0; i < 32; i++) {
-                String i_str = Integer.toString(i);
-                System.out.println(" [x] Requesting fib(" + i_str + ")");
-                response = fibonacciRpc.call(i_str);
-                System.out.println(" [.] Got '" + response + "'");
-            }
-        } catch (IOException | TimeoutException | InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            if (fibonacciRpc != null) {
-                try {
-                    fibonacciRpc.close();
-                } catch (IOException _ignore) {
-
-                }
-            }
-        }
     }
 }

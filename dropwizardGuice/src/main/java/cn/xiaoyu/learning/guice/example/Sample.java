@@ -88,6 +88,12 @@ public class Sample {
         this.printerList = printerList;
     }
 
+    public static void main(String[] args) {
+        Injector injector = Guice.createInjector(new SampleModule());
+        Sample sample = injector.getInstance(Sample.class);
+        sample.hello();
+    }
+
     public void hello() {
         simplePrinter.print();
         complexPrinter.print();
@@ -98,11 +104,5 @@ public class Sample {
         printerMap.forEach((k, v) -> v.print());
         // provider提供的注入的List
         printerList.forEach(IHelloPrinter::print);
-    }
-
-    public static void main(String[] args) {
-        Injector injector = Guice.createInjector(new SampleModule());
-        Sample sample = injector.getInstance(Sample.class);
-        sample.hello();
     }
 }

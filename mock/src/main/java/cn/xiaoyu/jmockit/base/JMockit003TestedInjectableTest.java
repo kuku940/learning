@@ -8,6 +8,28 @@ import org.junit.Test;
 
 import javax.annotation.Resource;
 
+interface MailService {
+    /**
+     * 发送邮件
+     *
+     * @param userId  邮件接收人Id
+     * @param content 邮件内容
+     * @return 邮件是否发送成功
+     */
+    boolean sendMail(long userId, String content);
+}
+
+interface UserCheckService {
+
+    /**
+     * 校验某个用户是否是合法用户
+     *
+     * @param userId 用户ID
+     * @return 合法的就返回true, 否则返回false
+     */
+    boolean check(long userId);
+}
+
 /**
  * 注释@Tested和@Injectable的使用
  *
@@ -37,28 +59,6 @@ public class JMockit003TestedInjectableTest {
         // JMockit帮我们实例化了userCheckService了，并通过OrderService的属性，注入到orderService对象中。
         Assert.assertTrue(orderService.submitOrder(testUserId, testItemId));
     }
-}
-
-interface MailService {
-    /**
-     * 发送邮件
-     *
-     * @param userId  邮件接收人Id
-     * @param content 邮件内容
-     * @return 邮件是否发送成功
-     */
-    boolean sendMail(long userId, String content);
-}
-
-interface UserCheckService {
-
-    /**
-     * 校验某个用户是否是合法用户
-     *
-     * @param userId 用户ID
-     * @return 合法的就返回true, 否则返回false
-     */
-    boolean check(long userId);
 }
 
 class OrderService {

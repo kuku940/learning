@@ -5,6 +5,12 @@ import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
+interface Class2Mocked {
+    String say(String name);
+
+    void show();
+}
+
 /**
  * @author Roin zhang
  * @date 2018/7/25
@@ -97,12 +103,6 @@ public class TestMockito {
         Mockito.verify(obj).say("Jack");
         Mockito.verify(obj).show();
     }
-}
-
-interface Class2Mocked {
-    String say(String name);
-
-    void show();
 }
 
 class Class3Method implements Class2Mocked {

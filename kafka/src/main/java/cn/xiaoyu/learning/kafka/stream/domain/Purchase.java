@@ -26,18 +26,18 @@ import java.util.Objects;
  */
 public class Purchase {
 
-      private String firstName;
-      private String lastName;
-      private String customerId;
-      private String creditCardNumber;
-      private String itemPurchased;
-      private String department;
-      private String employeeId;
-      private int quantity;
-      private double price;
-      private Date purchaseDate;
-      private String zipCode;
-      private String storeId;
+    private String firstName;
+    private String lastName;
+    private String customerId;
+    private String creditCardNumber;
+    private String itemPurchased;
+    private String department;
+    private String employeeId;
+    private int quantity;
+    private double price;
+    private Date purchaseDate;
+    private String zipCode;
+    private String storeId;
 
     private Purchase(Builder builder) {
         firstName = builder.firstName;
@@ -160,7 +160,8 @@ public class Purchase {
         result = 31 * result + (employeeId != null ? employeeId.hashCode() : 0);
         result = 31 * result + quantity;
         temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        ;
         result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
         result = 31 * result + (storeId != null ? storeId.hashCode() : 0);
         return result;
@@ -185,6 +186,7 @@ public class Purchase {
     }
 
     public static final class Builder {
+        private static final String CC_NUMBER_REPLACEMENT = "xxxx-xxxx-xxxx-";
         private String firstName;
         private String lastName;
         private String customerId;
@@ -197,8 +199,6 @@ public class Purchase {
         private String department;
         private String employeeId;
         private String storeId;
-
-        private static final String CC_NUMBER_REPLACEMENT="xxxx-xxxx-xxxx-";
 
         private Builder() {
         }
@@ -214,10 +214,10 @@ public class Purchase {
         }
 
 
-        public Builder maskCreditCard(){
+        public Builder maskCreditCard() {
             Objects.requireNonNull(this.creditCardNumber, "Credit Card can't be null");
             String[] parts = this.creditCardNumber.split("-");
-            if (parts.length < 4 ) {
+            if (parts.length < 4) {
                 this.creditCardNumber = "xxxx";
             } else {
                 String last4Digits = this.creditCardNumber.split("-")[3];

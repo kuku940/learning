@@ -14,6 +14,7 @@ import java.util.Random;
 
 public class Md5Utils {
     private static Random r = new Random();
+
     /**
      * MD5加密
      *

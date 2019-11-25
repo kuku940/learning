@@ -11,10 +11,6 @@ public class AnOrdinaryClass {
      */
     private int value;
 
-    public int getValue() {
-        return value;
-    }
-
     /**
      * 静态方法
      *
@@ -22,6 +18,10 @@ public class AnOrdinaryClass {
      */
     public static int staticMethod() {
         return 1;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     /**

@@ -11,6 +11,11 @@ public class CommonProducer {
     private String topicName;
     private Producer<String, String> producer;
 
+    public CommonProducer(String topicName) {
+        this.topicName = topicName;
+        init();
+    }
+
     private void init() {
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "master:9091,master:9092,master:9093");
@@ -53,10 +58,5 @@ public class CommonProducer {
                 listener.callback(metadata);
             });
         }
-    }
-
-    public CommonProducer(String topicName) {
-        this.topicName = topicName;
-        init();
     }
 }

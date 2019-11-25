@@ -22,9 +22,8 @@ import java.util.List;
  */
 @ChannelHandler.Sharable
 public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<CreateGroupRequestPacket> {
-    private static final Log LOGGER = LogFactory.getLog(CreateGroupRequestHandler.class);
-
     public static final CreateGroupRequestHandler INSTANCE = new CreateGroupRequestHandler();
+    private static final Log LOGGER = LogFactory.getLog(CreateGroupRequestHandler.class);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, CreateGroupRequestPacket createGroupRequestPacket) throws Exception {

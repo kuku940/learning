@@ -30,7 +30,7 @@ public class PersonMapperTest {
         l.forEach(user -> System.out.println(user.toString()));
 
         System.out.println("------------分页插件------------");
-        Page page = new Page<User>(2,1);
+        Page page = new Page<User>(2, 1);
         IPage<User> users = mapper.selectPageVo(page);
         users.getRecords().forEach(user -> System.out.println(user.toString()));
     }

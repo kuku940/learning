@@ -29,6 +29,13 @@ public class TestEntity<T extends BaseEntity> {
 class Person {
     private BigDecimal amount;
 
+    public Person(int val) {
+        this.amount = new BigDecimal(val);
+    }
+
+    public Person() {
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -36,9 +43,4 @@ class Person {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
-    public Person(int val) {
-        this.amount = new BigDecimal(val);
-    }
-    public Person(){}
 }

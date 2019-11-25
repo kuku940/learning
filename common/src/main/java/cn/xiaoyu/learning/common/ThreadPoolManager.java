@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class ThreadPoolManager {
-    private static ExecutorService instance;
     private static final int CORE_POOL_SIZE = 20;
     private static final int MAXIMUM_POOL_SIZE = 30;
+    private static ExecutorService instance;
 
     public static ExecutorService getInstance() {
         ExecutorService localInstance = instance;
