@@ -24,7 +24,7 @@ public class HelloJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         JobKey key = context.getJobDetail().getKey();
         JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
-//
+
 //        String jobSays = jobDataMap.getString("JobSays");
 //        float floatValue = jobDataMap.getFloat("FloatValue");
 

@@ -10,9 +10,6 @@ import org.quartz.impl.StdSchedulerFactory;
  */
 public class QuartzTest {
 	public static void main(String[] args) throws SchedulerException {
-		Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-		scheduler.start();
-
 		// define the job and tie it to HelloJob class
 		JobDetail job = JobBuilder.newJob(HelloJob.class)
 				.withIdentity("myJob", "group1")
@@ -30,13 +27,8 @@ public class QuartzTest {
 						.repeatForever())
 				.build();
 
-		CronTrigger cronTrigger = (CronTrigger) TriggerBuilder.newTrigger()
-				.withIdentity("trigger", "groupName")
-				.withSchedule(CronScheduleBuilder.cronSchedule("0 0/2 8-17 * * ?")
-						.withMisfireHandlingInstructionFireAndProceed())
-				.build();
-
-
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        scheduler.start();
 		// tell quartz to schedule the job using our trigger
 		scheduler.scheduleJob(job, trigger);
 
