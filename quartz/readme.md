@@ -284,6 +284,8 @@ JobStore负责跟踪您提供给程序的所有“工作数据”：jobs，trigg
 JDBC JobStore几乎可以与任何数据库一起使用，例如Oracle, PostgreSQL, MySQL, MS SQLServer,
 HSQLDB和DB2。要使用JDBC JobStore，必须先创建一组数据库表供Quartz使用。
 
+[tables_mysql.sql](https://github.com/quartz-scheduler/quartz/blob/9f9e400733f51f7cb658e3319fc2c140ab8af938/quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore/tables_mysql.sql)
+
 注：在创建表后，在配置和启动JDBCStore前，还需要确定应用程序需要哪种类型的事务。
 如果你不需要将调度命令（例如添加或删除trigger）绑定到其他事务，那么可以使用**JobStoreTX**来管理；
 如果需要绑定其他事务（即J2EE应用程序服务器），可以使用**JobStoreCMT**，让应用程序服务器容器来管理事务。

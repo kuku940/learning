@@ -3,6 +3,9 @@ package cn.xiaoyu.learning.quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * @author roin.zhang
@@ -30,7 +33,9 @@ public class QuartzTest {
         Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
         scheduler.start();
 		// tell quartz to schedule the job using our trigger
-		scheduler.scheduleJob(job, trigger);
+		Set triggers = new HashSet();
+		triggers.add(trigger);
+		scheduler.scheduleJob(job, triggers, true);
 
 //        scheduler.shutdown();
 	}
