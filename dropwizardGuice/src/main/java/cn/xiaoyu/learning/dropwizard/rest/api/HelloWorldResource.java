@@ -1,5 +1,6 @@
-package cn.xiaoyu.learning.dropwizard.example;
+package cn.xiaoyu.learning.dropwizard.rest.api;
 
+import cn.xiaoyu.learning.dropwizard.model.Saying;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;

@@ -1,4 +1,4 @@
-package cn.xiaoyu.learning.dropwizard.example;
+package cn.xiaoyu.learning.dropwizard.health;
 
 import com.codahale.metrics.health.HealthCheck;
 

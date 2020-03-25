@@ -1,4 +1,4 @@
-package cn.xiaoyu.learning.dropwizard.example;
+package cn.xiaoyu.learning.dropwizard;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;

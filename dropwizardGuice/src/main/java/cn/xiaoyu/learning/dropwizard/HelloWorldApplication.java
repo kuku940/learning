@@ -1,5 +1,7 @@
-package cn.xiaoyu.learning.dropwizard.example;
+package cn.xiaoyu.learning.dropwizard;
 
+import cn.xiaoyu.learning.dropwizard.health.TemplateHealthCheck;
+import cn.xiaoyu.learning.dropwizard.rest.api.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
