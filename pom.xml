@@ -34,6 +34,7 @@
         <module>jooq</module>
         <module>dropwizardGuice</module>
         <module>quartz</module>
+        <module>common-pools</module>
     </modules>
 
     <properties>
