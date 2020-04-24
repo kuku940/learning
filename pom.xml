@@ -20,21 +20,15 @@
         <module>java-annotation</module>
         <module>guava</module>
         <module>java8</module>
-        <module>mock</module>
-        <module>cxfservice</module>
-        <module>rabbitmq</module>
         <module>common</module>
         <module>netty</module>
         <module>protobuf</module>
-        <module>rocketmq</module>
-        <module>mybatis-plus</module>
-        <module>kafka</module>
         <module>java</module>
-        <module>im</module>
-        <module>jooq</module>
         <module>dropwizardGuice</module>
         <module>quartz</module>
-        <module>common-pools</module>
+        <module>unit-test</module>
+        <module>mq</module>
+        <module>data-access</module>
     </modules>
 
     <properties>
