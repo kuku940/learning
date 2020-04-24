@@ -31,7 +31,7 @@ public class TestHelloWorld {
     }
 
     /**
-     * 超时测试
+     * 超时测试：表示如果单元测试花费的时间超过指定的毫秒数
      */
     @Test(timeOut = 100)
     public void testThisShouldPass() throws InterruptedException {
