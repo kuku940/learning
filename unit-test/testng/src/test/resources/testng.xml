@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<!-- @BeforeSuite -->
+<suite name="TestAll">
+    <test name="TestNG忽略，超时测试">
+        <classes>
+            <class name="cn.xiaoyu.learning.unittest.testng.TestHelloWorld"/>
+        </classes>
+    </test>
+
+    <test name="TestNG套件测试">
+        <classes>
+            <class name="cn.xiaoyu.learning.unittest.testng.db.TestDBConnection"/>
+            <class name="cn.xiaoyu.learning.unittest.testng.db.DBConfig"/>
+        </classes>
+    </test>
+
+    <test name="TestNG依赖测试">
+        <classes>
+            <class name="cn.xiaoyu.learning.unittest.testng.depend.TestDepends"/>
+        </classes>
+    </test>
+
+    <test name="TestNG预期异常测试">
+        <classes>
+            <class name="cn.xiaoyu.learning.unittest.testng.exception.TestExpectedException"/>
+            <class name="cn.xiaoyu.learning.unittest.testng.exception.TestOperateOrderExpectedException"/>
+        </classes>
+    </test>
+
+    <test name="TestNG分组测试">
+        <groups>
+            <run>
+                <include name="mysql"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="cn.xiaoyu.learning.unittest.testng.group.TestGroup1"/>
+            <class name="cn.xiaoyu.learning.unittest.testng.group.TestGroup2"/>
+        </classes>
+    </test>
+
+    <test name="TestNG参数化测试">
+        <parameter name="username" value="root_by_xml"></parameter>
+        <parameter name="password" value="123456_by_xml"></parameter>
+        <classes>
+            <class name="cn.xiaoyu.learning.unittest.testng.parameter.DataProviderLearn"/>
+        </classes>
+    </test>
+</suite>
