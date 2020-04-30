@@ -1,5 +1,6 @@
 package cn.xiaoyu.rabbit.hellowolrd;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -18,13 +19,8 @@ public class Producer {
     private final static String QUEUE_NAME = "hello";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        // 创建连接工厂
-        ConnectionFactory factory = new ConnectionFactory();
-        // 设置 RabbitMQ地址
-        factory.setHost("localhost");
-
         // 建立到代理服务器的连接
-        Connection conn = factory.newConnection();
+        Connection conn = ConnectionUtils.getConnection();
         // 获得信道
         Channel channel = conn.createChannel();
 

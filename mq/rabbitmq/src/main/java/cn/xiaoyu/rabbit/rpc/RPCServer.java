@@ -1,8 +1,10 @@
 package cn.xiaoyu.rabbit.rpc;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -27,10 +29,7 @@ public class RPCServer {
         Connection connection = null;
 
         try {
-            ConnectionFactory factory = new ConnectionFactory();
-            factory.setHost("localhost");
-
-            connection = factory.newConnection();
+            connection = ConnectionUtils.getConnection();
             final Channel channel = connection.createChannel();
 
             channel.queueDeclare(RPC_QUEUE_NAME, false, false, false, null);
@@ -49,7 +48,7 @@ public class RPCServer {
 
                     String response = "";
                     try {
-                        String message = new String(body, "UTF-8");
+                        String message = new String(body, StandardCharsets.UTF_8);
                         int n = Integer.parseInt(message);
 
                         System.out.println(" [.] fib(" + message + ")");
@@ -57,7 +56,7 @@ public class RPCServer {
                     } catch (RuntimeException ex) {
                         System.out.println(" [.] " + ex.toString());
                     } finally {
-                        channel.basicPublish("", properties.getReplyTo(), replyProps, response.getBytes("UTF-8"));
+                        channel.basicPublish("", properties.getReplyTo(), replyProps, response.getBytes(StandardCharsets.UTF_8));
                         channel.basicAck(envelope.getDeliveryTag(), false);
 
                         // RabbitMq consumer worker thread notifies the RPC server owner thread

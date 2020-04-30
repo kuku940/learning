@@ -1,8 +1,10 @@
 package cn.xiaoyu.rabbit.routing;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -15,10 +17,7 @@ public class ReceiveLogsDirect2 {
     private static final String[] routingKeys = {"error"};
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-
-        Connection connection = factory.newConnection();
+        Connection connection = ConnectionUtils.getConnection();
         Channel channel = connection.createChannel();
 
         // 声明交换器
@@ -36,7 +35,7 @@ public class ReceiveLogsDirect2 {
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                String message = new String(body, "UTF-8");
+                String message = new String(body, StandardCharsets.UTF_8);
                 System.out.println(" [2] Received '" + envelope.getRoutingKey() + "':'" + message + "'");
             }
         };

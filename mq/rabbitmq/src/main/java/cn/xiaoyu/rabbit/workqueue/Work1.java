@@ -1,8 +1,10 @@
 package cn.xiaoyu.rabbit.workqueue;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -14,10 +16,7 @@ public class Work1 {
     private static final String TASK_QUEUE_NAME = "task_queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-
-        final Connection connection = factory.newConnection();
+        final Connection connection = ConnectionUtils.getConnection();
         final Channel channel = connection.createChannel();
 
         channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
@@ -28,7 +27,7 @@ public class Work1 {
         final Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                String message = new String(body, "UTF-8");
+                String message = new String(body, StandardCharsets.UTF_8);
 
                 System.out.println("Worker1 [x] Received '" + message + "'");
                 try {

@@ -1,8 +1,10 @@
 package cn.xiaoyu.rabbit.rpc;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -19,10 +21,7 @@ public class RPCClient {
     private String requestQueueName = "rpc_queue";
 
     public RPCClient() throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-
-        connection = factory.newConnection();
+        connection = ConnectionUtils.getConnection();
         channel = connection.createChannel();
     }
 
@@ -61,15 +60,15 @@ public class RPCClient {
                 .replyTo(replyQueueName)
                 .build();
 
-        channel.basicPublish("", requestQueueName, props, message.getBytes("utf-8"));
+        channel.basicPublish("", requestQueueName, props, message.getBytes(StandardCharsets.UTF_8));
 
-        final BlockingQueue<String> response = new ArrayBlockingQueue<String>(1);
+        final BlockingQueue<String> response = new ArrayBlockingQueue<>(1);
 
         String ctag = channel.basicConsume(replyQueueName, true, new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 if (properties.getCorrelationId().equals(corrId)) {
-                    response.offer(new String(body, "UTF-8"));
+                    response.offer(new String(body, StandardCharsets.UTF_8));
                 }
             }
         });

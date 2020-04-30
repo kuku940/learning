@@ -1,5 +1,6 @@
 package cn.xiaoyu.rabbit.routing;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -19,9 +20,7 @@ public class RoutingSendDirect {
     private static final String[] routingKeys = {"info", "warning", "error"};
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
+        Connection connection = ConnectionUtils.getConnection();
         Channel channel = connection.createChannel();
 
         // 声明交换器

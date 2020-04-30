@@ -1,5 +1,6 @@
 package cn.xiaoyu.rabbit.header;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -17,21 +18,14 @@ public class Customer {
     private final static String QUEUE_NAME = "header-queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("127.0.0.1");
-        factory.setUsername("guest");
-        factory.setPassword("guest");
-
-        factory.setPort(AMQP.PROTOCOL.PORT);
-
-        Connection conn = factory.newConnection();
+        Connection conn = ConnectionUtils.getConnection();
         Channel channel = conn.createChannel();
 
         // 声明转发器和类型headers
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.HEADERS, false, true, null);
         channel.queueDeclare(QUEUE_NAME, false, false, true, null);
 
-        Map<String, Object> headers = new Hashtable<String, Object>();
+        Map<String, Object> headers = new Hashtable<>();
         // 匹配有两种方式all和any
         headers.put("x-match", "any");
         headers.put("username", "Tom");

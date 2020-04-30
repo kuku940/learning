@@ -1,5 +1,6 @@
 package cn.xiaoyu.rabbit.publish;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -18,9 +19,7 @@ public class EmitLog {
     private static final String EXCHANGE_NAME = "logs";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection conn = factory.newConnection();
+        Connection conn = ConnectionUtils.getConnection();
         Channel channel = conn.createChannel();
 
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");

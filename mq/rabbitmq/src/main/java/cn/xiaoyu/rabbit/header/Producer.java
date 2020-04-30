@@ -1,5 +1,6 @@
 package cn.xiaoyu.rabbit.header;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -19,21 +20,14 @@ public class Producer {
     private final static String EXCHANGE_NAME = "header-exchange";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("127.0.0.1");
-        factory.setUsername("guest");
-        factory.setPassword("guest");
-
-        factory.setPort(AMQP.PROTOCOL.PORT);
-
-        Connection conn = factory.newConnection();
+        Connection conn = ConnectionUtils.getConnection();
         Channel channel = conn.createChannel();
 
         // 声明转发器和类型headers
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.HEADERS, false, true, null);
         String message = new Date().toLocaleString() + ": log something";
 
-        Map<String, Object> headers = new Hashtable<String, Object>();
+        Map<String, Object> headers = new Hashtable<>();
         headers.put("username", "Tom");
         headers.put("age", 20);
         AMQP.BasicProperties.Builder properties = new AMQP.BasicProperties.Builder();

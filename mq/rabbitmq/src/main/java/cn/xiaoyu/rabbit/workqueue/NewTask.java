@@ -1,5 +1,6 @@
 package cn.xiaoyu.rabbit.workqueue;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -19,10 +20,7 @@ public class NewTask {
     private static final String TASK_QUEUE_NAME = "task_queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-
-        Connection connection = factory.newConnection();
+        Connection connection = ConnectionUtils.getConnection();
         Channel channel = connection.createChannel();
 
         channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);

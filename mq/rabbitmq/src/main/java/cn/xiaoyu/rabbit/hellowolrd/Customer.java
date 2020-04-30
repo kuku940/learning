@@ -1,8 +1,10 @@
 package cn.xiaoyu.rabbit.hellowolrd;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -14,12 +16,8 @@ public class Customer {
     private final static String QUEUE_NAME = "hello";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        // 创建链接工厂
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-
         // 建立到代理服务器的链接
-        Connection conn = factory.newConnection();
+        Connection conn = ConnectionUtils.getConnection();
         // 获取信道
         final Channel channel = conn.createChannel();
 
@@ -41,7 +39,7 @@ public class Customer {
                 //确认消息
                 channel.basicAck(deliveryTag, false);
 
-                String bodyStr = new String(body, "UTF-8");
+                String bodyStr = new String(body, StandardCharsets.UTF_8);
                 System.out.println(" [x] Received '" + bodyStr + "'");
             }
         };

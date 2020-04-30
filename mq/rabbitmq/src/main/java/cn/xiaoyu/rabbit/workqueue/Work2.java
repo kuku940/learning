@@ -1,8 +1,10 @@
 package cn.xiaoyu.rabbit.workqueue;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,10 +18,7 @@ public class Work2 {
     private static AtomicInteger flag = new AtomicInteger(0);
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-
-        final Connection connection = factory.newConnection();
+        final Connection connection = ConnectionUtils.getConnection();
         final Channel channel = connection.createChannel();
 
         // durable - 持久化
@@ -31,7 +30,7 @@ public class Work2 {
         final Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                String message = new String(body, "UTF-8");
+                String message = new String(body, StandardCharsets.UTF_8);
 
                 System.out.println("Worker2 [x] Received '" + message + "'");
                 try {

@@ -1,5 +1,6 @@
 package cn.xiaoyu.rabbit.topic;
 
+import cn.xiaoyu.rabbit.common.ConnectionUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -16,12 +17,9 @@ public class TopicSend {
 
     public static void main(String[] args) {
         Connection conn = null;
-        Channel channel = null;
+        Channel channel;
         try {
-            ConnectionFactory factory = new ConnectionFactory();
-            factory.setHost("localhost");
-
-            conn = factory.newConnection();
+            conn = ConnectionUtils.getConnection();
             channel = conn.createChannel();
 
             channel.exchangeDeclare(EXCHANGE_NAME, "topic");
