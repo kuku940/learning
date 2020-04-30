@@ -22,6 +22,7 @@ public class EmitLog {
         Connection conn = ConnectionUtils.getConnection();
         Channel channel = conn.createChannel();
 
+        // 声明exchange
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
         // 分发消息

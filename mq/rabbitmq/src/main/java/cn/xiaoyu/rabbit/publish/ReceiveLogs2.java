@@ -16,8 +16,6 @@ public class ReceiveLogs2 {
     private static final String EXCHANGE_NAME = "logs";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
         Connection connection = ConnectionUtils.getConnection();
         Channel channel = connection.createChannel();
 

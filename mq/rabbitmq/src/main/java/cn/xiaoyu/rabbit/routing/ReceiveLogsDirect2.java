@@ -8,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * 消费Error的错误信息
+ *
  * @author Roin zhang
  * @date 2018/8/16
  */
