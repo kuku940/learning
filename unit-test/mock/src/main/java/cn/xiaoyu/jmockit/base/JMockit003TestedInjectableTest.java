@@ -1,5 +1,6 @@
 package cn.xiaoyu.jmockit.base;
 
+import mockit.Deencapsulation;
 import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Tested;
@@ -45,6 +46,11 @@ public class JMockit003TestedInjectableTest {
 
     @Test
     public void submitOrderTest(@Injectable MailService mailService, @Injectable UserCheckService userCheckService) {
+        // 还可以通过如下方式注入
+//        new Expectations(orderService) {{
+//            Deencapsulation.setField(orderService, "userCheckService", userCheckService);
+//        }};
+
         new Expectations() {{
             // 模拟邮件全部发送成功
             mailService.sendMail(testUserId, anyString);
@@ -63,8 +69,8 @@ public class JMockit003TestedInjectableTest {
 
 class OrderService {
     @Resource
-    UserCheckService userCheckService;
-    MailService mailService;
+    private UserCheckService userCheckService;
+    private MailService mailService;
 
     // 构造函数
     public OrderService(MailService mailService) {
