@@ -1,14 +1,17 @@
 package cn.xiaoyu.mockito;
 
 import cn.xiaoyu.mockito.dao.UserDao;
+import cn.xiaoyu.mockito.entity.ITool;
 import cn.xiaoyu.mockito.entity.User;
 import cn.xiaoyu.mockito.service.UserService;
+import com.google.common.cache.LoadingCache;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -17,6 +20,7 @@ import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -53,5 +57,14 @@ public class TestMockito {
     public void testInsert() {
         doNothing().when(userDao).insertUser(any(User.class));
         userService.regist(new User());
+    }
+
+    @Test
+    public void testDoSomething() {
+        ITool tool = Mockito.mock(ITool.class);
+        Mockito.when(tool.say(anyString())).thenReturn("hello World");
+        when(userDao.doSomething()).thenReturn(tool);
+
+        Assert.assertEquals("hello World", userService.doSomething("你好"));
     }
 }

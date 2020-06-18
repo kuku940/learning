@@ -1,6 +1,7 @@
 package cn.xiaoyu.mockito.service;
 
 import cn.xiaoyu.mockito.dao.UserDao;
+import cn.xiaoyu.mockito.entity.ITool;
 import cn.xiaoyu.mockito.entity.User;
 
 import java.util.List;
@@ -23,5 +24,9 @@ public class UserService {
 
     public void regist(User user) {
         userDao.insertUser(user);
+    }
+
+    public String doSomething(String slogan) {
+        return userDao.doSomething().say(slogan);
     }
 }

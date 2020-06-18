@@ -1,5 +1,6 @@
 package cn.xiaoyu.mockito.dao;
 
+import cn.xiaoyu.mockito.entity.ITool;
 import cn.xiaoyu.mockito.entity.User;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface UserDao {
     List<User> getUsers(long userId);
 
     void insertUser(User user);
+
+    ITool doSomething();
 }
