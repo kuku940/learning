@@ -1,15 +1,17 @@
 package cn.xiaoyu.jmockit;
 
-import mockit.*;
+import mockit.Deencapsulation;
+import mockit.Expectations;
+import mockit.Injectable;
+import mockit.Mock;
+import mockit.MockUp;
+import mockit.Tested;
+import mockit.Verifications;
 import mockit.integration.junit4.JMockit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.Calendar;
-
-import static org.mockito.Matchers.anyLong;
 
 /**
  * @author roin.zhang
