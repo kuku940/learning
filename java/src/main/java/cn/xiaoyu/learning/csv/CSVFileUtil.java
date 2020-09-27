@@ -5,9 +5,13 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,5 +50,23 @@ public class CSVFileUtil {
             }
         }
         return dataList;
+    }
+
+    public static void writeCSV(OutputStream out, Iterable<?> iter, String charset, String... header) {
+        try {
+            // 写入bom, 防止中文乱码
+            byte[] bytes = {(byte) 0xEF, (byte) 0xBB, (byte) 0xBF};
+            out.write(bytes);
+
+            OutputStreamWriter osw = new OutputStreamWriter(out, charset);
+            CSVFormat csvFormat = CSVFormat.EXCEL.withHeader(header);
+
+            CSVPrinter csvPrinter = new CSVPrinter(osw, csvFormat);
+            csvPrinter.printRecords(iter);
+            csvPrinter.flush();
+            csvPrinter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

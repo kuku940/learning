@@ -14,8 +14,8 @@ public class DateUtils {
     public static final String YYYYMMDD = "yyyy-MM-dd";
 
     public static Date toDate(String date, String pattern) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        return simpleDateFormat.parse(date);
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.parse(date);
     }
 
     public static Calendar toCalendar(Date date) {
@@ -28,5 +28,15 @@ public class DateUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(toDate(date, pattern));
         return calendar;
+    }
+
+    public static String format(Date date, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
+
+    public static String format(Calendar calendar, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(calendar.getTime());
     }
 }

@@ -1,6 +1,8 @@
 package cn.xiaoyu.learning.csv;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -10,6 +12,8 @@ import java.util.Date;
  * @date 2020/9/27
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
     /**
      * 姓名
@@ -31,4 +35,8 @@ public class Student {
      * 入学时间
      */
     private Calendar admission;
+    /**
+     * 描述
+     */
+    private String desc;
 }
