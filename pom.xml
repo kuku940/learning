@@ -30,6 +30,7 @@
         <module>mq</module>
         <module>data-access</module>
         <module>es</module>
+        <module>spring</module>
     </modules>
 
     <properties>
