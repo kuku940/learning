@@ -1,5 +1,7 @@
 package cn.xiaoyu.learning.spring;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cglib.beans.BeanCopier;
 
 import java.text.NumberFormat;
@@ -9,6 +11,8 @@ import java.text.NumberFormat;
  * @date 2020/9/27
  */
 public class BeanCopierTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BeanCopierTest.class);
+
     public static void main(String[] args) {
         // Double大于10位时转换为科学计数法
         Person person = new Person("1", 1381234567890D);
@@ -24,7 +28,7 @@ public class BeanCopierTest {
 
         copier.copy(person, personStr, (value, target, context) -> {
             if (value instanceof Double) {
-                System.out.println("将" + context + "由Double类型转化成String类型");
+                LOGGER.info("将" + context + "由Double类型转化成String类型");
                 return nf.format(value);
             }
             return value;
