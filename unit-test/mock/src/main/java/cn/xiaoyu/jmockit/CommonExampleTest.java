@@ -14,6 +14,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
+ * 这是个标准的注入以及测试方式
+ * <p>
+ * 针对UserDao这个对象可以手动new一个对象，然后再通过设置私有变量的方式注入进去
+ * 然后UserService初始化也是通过new对象的方式，然后直接调用，而不是@Tested这种标准写法
+ * 这样的话，可以将controller-service-dao层整体写完，一个单元测试，跑通三个类
+ *
  * @author roin.zhang
  * @date 2020/6/11
  */

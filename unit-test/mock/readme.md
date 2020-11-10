@@ -68,7 +68,7 @@ JMockit 是一个轻量级的mock框架是用以帮助开发人员编写测试�
 该项目完全基于 Java 5 SE 的 java.lang.instrument 包开发，内部使用 ASM 库来修改Java的Bytecode。
   
  
-http://ginge.iteye.com/blog/841182
+http://ginge.iteye.com/blog/841182  
 https://www.cnblogs.com/simplestupid/p/5170220.html
 
 #### mock私有方法和私有属性
