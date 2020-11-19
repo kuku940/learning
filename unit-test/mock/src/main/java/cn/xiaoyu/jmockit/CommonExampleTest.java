@@ -68,6 +68,7 @@ public class CommonExampleTest {
         new MockUp<UserDao>(UserDao.class) {
             @Mock
             public void insert(User user) {
+                System.out.println("insert user");
             }
         };
 
