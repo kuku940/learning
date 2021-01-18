@@ -20,7 +20,5 @@ public class Md5UtilsTest {
         String md5WithSalt = Md5Utils.md5WithSalt(key, encoding);
         System.out.println(md5WithSalt);
         System.out.println(Md5Utils.verify(key, md5WithSalt, encoding));
-
-
     }
 }

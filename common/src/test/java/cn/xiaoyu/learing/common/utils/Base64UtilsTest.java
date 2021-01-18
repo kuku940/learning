@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
 public class Base64UtilsTest {
     @Test
     public void test() throws UnsupportedEncodingException {
-        String s = Base64Utils.byte2Base64("辽宁号".getBytes("UTF-8"));
+        String s = Base64Utils.byte2Base64("辽宁号 舷号16".getBytes("UTF-8"));
         System.out.println(s);
 
         byte[] bytes = Base64Utils.base642Byte(s);
