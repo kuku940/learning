@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 获取spring上下文的工具类
- *
- * @author 01399268
- * @date 2020/9/27
  */
 @Component
 public class ContextUtils implements ApplicationContextAware {
@@ -17,7 +14,9 @@ public class ContextUtils implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        context = applicationContext;
+        if (ContextUtils.context == null) {
+            ContextUtils.context = applicationContext;
+        }
     }
 
     /**
